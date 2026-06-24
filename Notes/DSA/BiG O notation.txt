@@ -1,0 +1,295 @@
+========================================
+BIG-O NOTATION QUICK NOTES
+========================================
+
+Purpose:
+- Measures how algorithm performance grows as input size (N) grows.
+- Focus on growth rate, not exact execution time.
+
+----------------------------------------
+COMMON COMPLEXITIES (BEST → WORST)
+----------------------------------------
+
+O(1)
+O(log N)
+O(N)
+O(N log N)
+O(N²)
+O(N³)
+O(2^N)
+O(N!)
+
+Memory:
+O(1) > O(logN) > O(N) > O(NlogN) > O(N²)
+
+----------------------------------------
+INPUT SIZE
+----------------------------------------
+
+N = number of elements in input
+
+Example:
+arr = [1,2,3,4,5]
+
+N = 5
+
+----------------------------------------
+RULE 1: IGNORE CONSTANTS
+----------------------------------------
+
+O(5N)      = O(N)
+O(100N)    = O(N)
+O(N/2)     = O(N)
+
+----------------------------------------
+RULE 2: KEEP HIGHEST GROWING TERM
+----------------------------------------
+
+O(N² + N + 100)
+= O(N²)
+
+O(N² + NlogN)
+= O(N²)
+
+O(N + logN)
+= O(N)
+
+----------------------------------------
+ADD vs MULTIPLY
+----------------------------------------
+
+Separate Loops → ADD
+
+for i in range(n):
+    ...
+
+for j in range(n):
+    ...
+
+O(N + N)
+= O(N)
+
+----------------------------------------
+
+Nested Loops → MULTIPLY
+
+for i in range(n):
+    for j in range(n):
+
+O(N × N)
+= O(N²)
+
+----------------------------------------
+O(1) CONSTANT TIME
+----------------------------------------
+
+arr[0]
+arr[n-1]
+
+Array indexing
+
+----------------------------------------
+O(N) LINEAR TIME
+----------------------------------------
+
+for i in range(n):
+    ...
+
+Single loop
+
+----------------------------------------
+O(log N) LOGARITHMIC TIME
+----------------------------------------
+
+i *= 2
+
+or
+
+i //= 2
+
+Examples:
+
+1
+2
+4
+8
+16
+
+or
+
+16
+8
+4
+2
+1
+
+Examples:
+Binary Search
+
+----------------------------------------
+O(N log N)
+----------------------------------------
+
+for i in range(n):
+    j = 1
+
+    while j < n:
+        j *= 2
+
+Outer Loop = N
+Inner Loop = logN
+
+O(N logN)
+
+----------------------------------------
+O(N²)
+----------------------------------------
+
+for i in range(n):
+    for j in range(n):
+
+O(N²)
+
+----------------------------------------
+TRIANGLE PATTERN
+----------------------------------------
+
+for i in range(n):
+    for j in range(i):
+
+Operations:
+
+0+1+2+...+(N-1)
+
+Formula:
+
+N(N-1)/2
+
+O(N²)
+
+----------------------------------------
+
+for i in range(n):
+    for j in range(n-i):
+
+Also:
+
+N+(N-1)+(N-2)+...
+
+O(N²)
+
+----------------------------------------
+CONSTANT INNER LOOP
+----------------------------------------
+
+for i in range(n):
+    for j in range(100):
+
+O(N)
+
+100 is constant
+
+----------------------------------------
+
+for i in range(n):
+    for j in range(i):
+        for k in range(100):
+
+O(N²)
+
+100 is constant
+
+----------------------------------------
+LOG SQUARED PATTERN
+----------------------------------------
+
+i = 1
+
+while i < n:
+
+    j = 1
+
+    while j < n:
+        j *= 2
+
+    i *= 2
+
+Outer = logN
+Inner = logN
+
+O(log² N)
+
+----------------------------------------
+BEST / AVERAGE / WORST CASE
+----------------------------------------
+
+Linear Search
+
+Best:
+O(1)
+
+Average:
+O(N)
+
+Worst:
+O(N)
+
+Interviews usually discuss:
+Worst Case Complexity
+
+----------------------------------------
+SPACE COMPLEXITY
+----------------------------------------
+
+Fixed variables:
+
+a = 10
+b = 20
+
+O(1)
+
+----------------------------------------
+
+arr = []
+
+for i in range(n):
+    arr.append(i)
+
+O(N)
+
+----------------------------------------
+INTERVIEW SHORTCUTS
+----------------------------------------
+
+arr[index]
+→ O(1)
+
+Single Loop
+→ O(N)
+
+Nested Loop
+→ O(N²)
+
+Three Nested Loops
+→ O(N³)
+
+*=2 or //=2
+→ O(logN)
+
+N + N
+→ O(N)
+
+N × logN
+→ O(NlogN)
+
+0+1+2+...+N
+→ O(N²)
+
+Keep Highest Growing Term
+
+O(N² + NlogN + N)
+→ O(N²)
+
+========================================
+END OF BIG-O NOTES
+========================================

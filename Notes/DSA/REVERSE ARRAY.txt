@@ -1,0 +1,49 @@
+1. Reverse Array
+Problem
+
+Reverse an array in-place.
+
+Example:
+
+Input:  [1,2,3,4,5]
+Output: [5,4,3,2,1]
+Approach 1: Extra Array
+arr = [1,2,3,4,5]
+res = []
+
+for i in range(len(arr)-1, -1, -1):
+    res.append(arr[i])
+Complexity
+Time: O(N)
+Space: O(N)
+Approach 2: Two Pointers (Optimal)
+Idea
+
+Swap first and last element.
+
+Move pointers towards center.
+
+Code
+left = 0
+right = len(arr)-1
+
+while left < right:
+    arr[left], arr[right] = arr[right], arr[left]
+
+    left += 1
+    right -= 1
+Example
+1 2 3 4 5
+
+Swap 1 and 5
+
+5 2 3 4 1
+
+Swap 2 and 4
+
+5 4 3 2 1
+Complexity
+Time: O(N)
+Space: O(1)
+Pattern
+Two Pointers

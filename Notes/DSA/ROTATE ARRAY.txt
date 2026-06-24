@@ -1,0 +1,97 @@
+3. Rotate Array (LeetCode 189)
+Problem
+
+Rotate array to the right by k positions.
+
+Example:
+
+nums = [1,2,3,4,5,6,7]
+k = 3
+
+Output:
+
+[5,6,7,1,2,3,4]
+Important Concept
+Modulo (%)
+
+Returns remainder.
+
+Examples:
+
+7 % 7 = 0
+8 % 7 = 1
+9 % 7 = 2
+10 % 7 = 3
+
+Used for:
+
+Wrap Around
+Formula
+new_index = (i + k) % n
+
+Meaning:
+
+Move k positions right.
+
+If index crosses boundary,
+come back from start.
+Extra Array Solution
+Code
+res = [0] * len(nums)
+
+for i in range(len(nums)):
+    res[(i+k)%len(nums)] = nums[i]
+
+nums[:] = res
+Example
+nums = [1,2,3,4,5,6,7]
+k = 3
+
+Result:
+
+[5,6,7,1,2,3,4]
+Complexity
+Time: O(N)
+Space: O(N)
+Optimal Solution
+Reverse Method
+
+Step 1
+
+Reverse entire array
+1 2 3 4 5 6 7
+
+↓
+
+7 6 5 4 3 2 1
+
+Step 2
+
+Reverse first k elements
+7 6 5
+
+↓
+
+5 6 7
+
+Array:
+
+5 6 7 4 3 2 1
+
+Step 3
+
+Reverse remaining elements
+4 3 2 1
+
+↓
+
+1 2 3 4
+
+Final:
+
+5 6 7 1 2 3 4
+Complexity
+Time: O(N)
+Space: O(1)
+Pattern
+Array Reversal

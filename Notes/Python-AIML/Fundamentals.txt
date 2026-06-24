@@ -1,0 +1,177 @@
+Python Fundamentals Notes (Day 2)
+1. For Loop
+Purpose
+
+Used when number of iterations is known.
+
+Syntax
+for i in range(5):
+    print(i)
+Output
+0
+1
+2
+3
+4
+Important
+range(5)
+
+means:
+
+0,1,2,3,4
+
+5 is excluded.
+
+Complexity
+O(N)
+2. While Loop
+Purpose
+
+Used when number of iterations is unknown.
+
+Syntax
+x = 0
+
+while x < 5:
+    print(x)
+    x += 1
+Important
+
+Loop runs until condition becomes False.
+
+Complexity
+O(N)
+3. Function
+Definition
+
+Reusable block of code.
+
+Syntax
+def greet():
+    print("Hello")
+Call
+greet()
+Benefits
+Reusability
+Cleaner Code
+Modular Programming
+4. Parameters vs Arguments
+Parameter
+
+Variable inside function definition.
+
+def greet(name):
+
+Here:
+
+name → Parameter
+Argument
+
+Actual value passed.
+
+greet("Adarsh")
+
+Here:
+
+"Adarsh" → Argument
+5. print() vs return()
+print()
+
+Displays output.
+
+print("Hello")
+
+Output:
+
+Hello
+
+Value is NOT stored.
+
+return()
+
+Sends value back to caller.
+
+def add():
+    return 5
+x = add()
+
+Result:
+
+x = 5
+Difference
+print() → Show Value
+
+return() → Give Value Back
+6. Function vs Method
+Function
+
+Independent.
+
+Example:
+
+sum(nums)
+len(nums)
+print()
+Method
+
+Belongs to an object.
+
+Example:
+
+name.upper()
+
+nums.append(5)
+
+nums.reverse()
+Difference
+Function → Called Directly
+
+Method → Called Through Object
+7. List Comprehension
+Traditional
+squares = []
+
+for i in range(5):
+    squares.append(i*i)
+Pythonic Way
+squares = [i*i for i in range(5)]
+
+Output:
+
+[0,1,4,9,16]
+Benefits
+Cleaner
+Shorter
+More Pythonic
+8. Reference vs Copy
+Reference
+x = [1,2]
+
+y = x
+
+Both point to same object.
+
+x.append(3)
+
+Output:
+
+[1,2,3]
+
+for both.
+
+Copy
+y = x.copy()
+
+Creates new list.
+
+Changing one doesn't affect other.
+
+Rule
+y = x
+
+→ Same Object
+
+
+y = x.copy()
+
+→ New Object

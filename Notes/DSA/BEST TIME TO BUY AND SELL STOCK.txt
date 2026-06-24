@@ -1,0 +1,198 @@
+==================================================
+LEETCODE #121 - BEST TIME TO BUY AND SELL STOCK
+==================================================
+
+Difficulty: Easy
+
+Pattern:
+Track Minimum So Far
+
+--------------------------------------------------
+PROBLEM
+--------------------------------------------------
+
+Given stock prices for each day.
+
+Buy once and sell once.
+
+Buy must happen before sell.
+
+Return maximum profit.
+
+If no profit is possible, return 0.
+
+Example:
+
+prices = [7,1,5,3,6,4]
+
+Buy at 1
+Sell at 6
+
+Profit = 5
+
+--------------------------------------------------
+BRUTE FORCE
+--------------------------------------------------
+
+Idea:
+
+Check every possible buy and sell pair.
+
+Code Logic:
+
+for i:
+    for j:
+
+        profit = prices[j] - prices[i]
+
+        update max_profit
+
+Time Complexity:
+O(N²)
+
+Space Complexity:
+O(1)
+
+Issue:
+Time Limit Exceeded (TLE)
+
+--------------------------------------------------
+OPTIMAL APPROACH
+--------------------------------------------------
+
+Idea:
+
+Keep track of:
+
+1. Minimum price seen so far
+2. Maximum profit seen so far
+
+For every price:
+
+profit = current_price - min_price
+
+Update max_profit if profit is larger.
+
+Update min_price if current price is smaller.
+
+--------------------------------------------------
+CODE LOGIC
+--------------------------------------------------
+
+min_price = prices[0]
+
+max_profit = 0
+
+for price in prices:
+
+    if price < min_price:
+        min_price = price
+
+    profit = price - min_price
+
+    if profit > max_profit:
+        max_profit = profit
+
+return max_profit
+
+--------------------------------------------------
+DRY RUN
+--------------------------------------------------
+
+prices = [7,1,5,3,6,4]
+
+Initial:
+
+min_price = 7
+max_profit = 0
+
+Price = 1
+
+min_price = 1
+
+Price = 5
+
+profit = 5 - 1 = 4
+
+max_profit = 4
+
+Price = 6
+
+profit = 6 - 1 = 5
+
+max_profit = 5
+
+Return 5
+
+--------------------------------------------------
+COMPLEXITY
+--------------------------------------------------
+
+Time Complexity:
+O(N)
+
+Reason:
+Single traversal
+
+Space Complexity:
+O(1)
+
+Reason:
+Only variables used
+
+--------------------------------------------------
+INTERVIEW EXPLANATION
+--------------------------------------------------
+
+Instead of checking every buy-sell pair,
+I keep track of the minimum price seen so far.
+
+For each day:
+
+profit = current_price - minimum_price
+
+I update the maximum profit whenever a larger
+profit is found.
+
+This reduces complexity from O(N²) to O(N).
+
+--------------------------------------------------
+LEARNING
+--------------------------------------------------
+
+✓ Array Traversal
+
+✓ Running Minimum
+
+✓ Profit Calculation
+
+✓ Complexity Optimization
+
+✓ O(N²) → O(N)
+
+--------------------------------------------------
+TRACKER ENTRY
+--------------------------------------------------
+
+Problem:
+Best Time To Buy And Sell Stock
+
+Difficulty:
+Easy
+
+Pattern:
+Track Minimum So Far
+
+Brute Force:
+O(N²)
+
+Optimal:
+O(N)
+
+Status:
+Solved & Understood
+
+Date:
+22-06-2026
+
+==================================================

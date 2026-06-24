@@ -1,0 +1,213 @@
+=========================================
+217. CONTAINS DUPLICATE
+=========================================
+
+PROBLEM:
+Given an integer array nums,
+return True if any value appears at least twice.
+Return False if all elements are distinct.
+
+Example:
+
+nums = [1,2,3,1]
+
+Output:
+True
+
+Because 1 appears twice.
+
+-----------------------------------------
+BRUTE FORCE APPROACH
+-----------------------------------------
+
+Idea:
+Compare every element with every other element.
+
+for i in range(len(nums)):
+    for j in range(i+1,len(nums)):
+        if nums[i] == nums[j]:
+            return True
+
+return False
+
+Time Complexity:
+O(N²)
+
+Space Complexity:
+O(1)
+
+Reason:
+Two nested loops.
+
+-----------------------------------------
+MY FIRST APPROACH
+-----------------------------------------
+
+for num in nums:
+    if nums.count(num) >= 2:
+        return True
+
+return False
+
+Time Complexity:
+O(N²)
+
+Reason:
+
+count() itself scans the entire list.
+
+Example:
+
+nums = [1,2,3,4]
+
+count(1) -> checks all elements
+count(2) -> checks all elements
+count(3) -> checks all elements
+count(4) -> checks all elements
+
+Total:
+N × N = O(N²)
+
+Works correctly but becomes slow for large inputs.
+
+Result:
+Time Limit Exceeded (TLE)
+
+-----------------------------------------
+OPTIMAL APPROACH (HASHMAP / SET)
+-----------------------------------------
+
+Idea:
+
+While traversing the array:
+
+1. If element already exists in hashmap/set
+   → duplicate found
+   → return True
+
+2. Otherwise store it.
+
+Example:
+
+nums = [1,2,3,1]
+
+Seen = {}
+
+1 not present → add
+
+Seen = {1}
+
+2 not present → add
+
+Seen = {1,2}
+
+3 not present → add
+
+Seen = {1,2,3}
+
+1 already present
+
+Return True
+
+-----------------------------------------
+CODE
+-----------------------------------------
+
+seen = {}
+
+for num in nums:
+
+    if num in seen:
+        return True
+
+    seen[num] = 1
+
+return False
+
+-----------------------------------------
+SET VERSION (BETTER)
+-----------------------------------------
+
+seen = set()
+
+for num in nums:
+
+    if num in seen:
+        return True
+
+    seen.add(num)
+
+return False
+
+-----------------------------------------
+WHY HASHMAP / SET IS FAST?
+-----------------------------------------
+
+Checking:
+
+if num in seen
+
+takes O(1) average time.
+
+Therefore:
+
+N elements × O(1)
+
+= O(N)
+
+-----------------------------------------
+COMPLEXITY
+-----------------------------------------
+
+Brute Force:
+Time  = O(N²)
+Space = O(1)
+
+count() Method:
+Time  = O(N²)
+Space = O(1)
+
+HashMap / Set:
+Time  = O(N)
+Space = O(N)
+
+-----------------------------------------
+PATTERN LEARNED
+-----------------------------------------
+
+Question asks:
+
+"Have I seen this element before?"
+
+→ Use HashMap / Set
+
+Keywords:
+
+Duplicate
+Repeated
+Frequency
+Count
+Unique
+Seen Before
+
+Most of the time:
+HashMap / Set is the first thing to think about.
+
+-----------------------------------------
+INTERVIEW LESSON
+-----------------------------------------
+
+Always think:
+
+1. Brute Force
+2. Analyze Complexity
+3. Optimize using HashMap / Set
+
+This is exactly the pattern used in:
+- Contains Duplicate
+- Two Sum
+- Valid Anagram
+- Group Anagrams
+- Top K Frequent Elements
+
+=========================================

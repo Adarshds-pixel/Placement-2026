@@ -1,0 +1,234 @@
+=========================================
+LEETCODE #1 - TWO SUM
+=========================================
+
+Problem:
+Given an array nums and a target,
+return indices of two numbers whose sum = target.
+
+Example:
+nums = [2,7,11,15]
+target = 9
+
+Output = [0,1]
+
+Because:
+nums[0] + nums[1]
+2 + 7 = 9
+
+-----------------------------------------
+PATTERN
+-----------------------------------------
+
+HashMap (Dictionary)
+
+-----------------------------------------
+BRUTE FORCE APPROACH
+-----------------------------------------
+
+Idea:
+Check every possible pair.
+
+Code Logic:
+
+for i:
+    for j:
+        if nums[i] + nums[j] == target:
+            return [i,j]
+
+Time Complexity:
+O(N²)
+
+Space Complexity:
+O(1)
+
+Why?
+
+Nested loops
+
+N × N = O(N²)
+
+-----------------------------------------
+OPTIMAL APPROACH
+-----------------------------------------
+
+Idea:
+
+For every number:
+
+Needed Number = Target - Current Number
+
+Ask:
+
+"Have I already seen the needed number?"
+
+If YES:
+    Return answer
+
+If NO:
+    Store current number in dictionary
+
+-----------------------------------------
+HASHMAP FORMAT
+-----------------------------------------
+
+Dictionary stores:
+
+Number : Index
+
+Example:
+
+{
+    2 : 0,
+    7 : 1,
+    11 : 2
+}
+
+-----------------------------------------
+DRY RUN
+-----------------------------------------
+
+nums = [2,7,11,15]
+target = 9
+
+Iteration 1:
+
+Current Number = 2
+
+Needed Number
+= 9 - 2
+= 7
+
+Dictionary = {}
+
+7 not found
+
+Store:
+
+{
+    2 : 0
+}
+
+----------------
+
+Iteration 2:
+
+Current Number = 7
+
+Needed Number
+= 9 - 7
+= 2
+
+Dictionary:
+
+{
+    2 : 0
+}
+
+2 found
+
+Return:
+
+[0,1]
+
+-----------------------------------------
+OPTIMAL CODE LOGIC
+-----------------------------------------
+
+Create empty dictionary
+
+Loop through array
+
+For each number:
+
+complement = target - current number
+
+If complement exists in dictionary:
+    return indices
+
+Else:
+    store current number and index
+
+-----------------------------------------
+COMPLEXITY
+-----------------------------------------
+
+Time Complexity:
+O(N)
+
+Reason:
+Single loop
+
+Dictionary lookup = O(1)
+
+Total = O(N)
+
+Space Complexity:
+O(N)
+
+Reason:
+Dictionary stores elements
+
+-----------------------------------------
+INTERVIEW EXPLANATION
+-----------------------------------------
+
+Brute Force checks every pair
+using nested loops.
+
+Time Complexity = O(N²)
+
+To optimize:
+
+Store previously seen numbers
+inside a HashMap.
+
+For each element:
+
+complement = target - current number
+
+If complement exists in HashMap,
+answer is found immediately.
+
+This reduces complexity to O(N).
+
+-----------------------------------------
+LEARNINGS
+-----------------------------------------
+
+✓ Array Traversal
+
+✓ Nested Loops
+
+✓ HashMap (Dictionary)
+
+✓ Complement Technique
+
+✓ Time Complexity Optimization
+
+-----------------------------------------
+TRACKER ENTRY
+-----------------------------------------
+
+Problem:
+Two Sum
+
+Difficulty:
+Easy
+
+Pattern:
+HashMap
+
+Brute Force:
+O(N²)
+
+Optimal:
+O(N)
+
+Status:
+Solved & Understood
+
+Date:
+22-06-2026
+
+=========================================

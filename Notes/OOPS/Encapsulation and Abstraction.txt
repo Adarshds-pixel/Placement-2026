@@ -1,0 +1,143 @@
+OOP Notes (Day 2)
+1. Class
+Definition
+
+Blueprint used to create objects.
+
+Example
+class Student:
+    pass
+Real Life
+Class → Car
+
+Class → Student
+
+Class → Mobile
+2. Object
+Definition
+
+Instance of a class.
+
+Example
+s1 = Student()
+Real Life
+Class → Car
+
+Object → Mercedes
+Object → BMW
+Object → Audi
+3. Constructor
+Definition
+
+Special method executed automatically when object is created.
+
+Syntax
+class Student:
+
+    def __init__(self,name):
+        self.name = name
+Purpose
+
+Initialize object attributes.
+
+4. self Keyword
+Purpose
+
+Refers to current object.
+
+Example
+self.name = name
+
+means:
+
+Store name inside current object.
+Why not
+name = name
+
+?
+
+Because nothing gets stored inside object.
+
+Rule
+self.attribute
+
+→ Attribute belongs to object
+5. Encapsulation
+Definition
+
+Wrapping data and methods together and restricting direct access.
+
+Goal
+Security
+Maintainability
+Controlled Access
+Example
+
+ATM
+
+Allowed:
+
+Withdraw()
+Deposit()
+CheckBalance()
+
+Not Allowed:
+
+Direct Database Access
+Interview Definition
+Wrapping data and methods together while restricting direct access to internal data.
+6. Abstraction
+Definition
+
+Hide complexity and show only essential functionality.
+
+Example
+
+Car
+
+You use:
+
+Steering
+Brake
+Accelerator
+
+without knowing:
+
+Fuel Injection
+Combustion
+Pistons
+ChatGPT Example
+
+You use:
+
+Ask Question
+Get Response
+
+without knowing:
+
+Neural Networks
+Attention Mechanism
+Model Weights
+Interview Definition
+Hiding implementation details and exposing only necessary functionality.
+Encapsulation vs Abstraction
+Encapsulation
+Focus:
+Protect Data
+
+Question:
+How to secure data?
+
+Example:
+
+ATM
+Abstraction
+Focus:
+Hide Complexity
+
+Question:
+How to simplify usage?
+
+Example:
+
+Car
