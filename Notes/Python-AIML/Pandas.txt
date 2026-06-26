@@ -1,0 +1,555 @@
+# Pandas Fundamentals Notes
+
+---
+
+# What is Pandas?
+
+Pandas is an open-source Python library used for data manipulation and analysis.
+
+It provides fast and flexible data structures that make working with structured data easy.
+
+### Applications
+
+* Data Cleaning
+* Data Analysis
+* Data Manipulation
+* Machine Learning Preprocessing
+* Data Visualization Preparation
+
+---
+
+# Importing Pandas
+
+```python
+import pandas as pd
+```
+
+`pd` is the standard alias used for Pandas.
+
+---
+
+# Pandas Data Structures
+
+Pandas mainly provides two data structures:
+
+## 1. Series
+
+A one-dimensional labeled array.
+
+Example:
+
+```python
+import pandas as pd
+
+s = pd.Series([10, 20, 30, 40])
+
+print(s)
+```
+
+Output:
+
+```
+0    10
+1    20
+2    30
+3    40
+dtype: int64
+```
+
+### Features
+
+* One-dimensional
+* Stores single column of data
+* Has index labels
+
+---
+
+## Creating Series
+
+### From List
+
+```python
+numbers = pd.Series([5, 10, 15])
+```
+
+### With Custom Index
+
+```python
+numbers = pd.Series(
+    [5,10,15],
+    index=["A","B","C"]
+)
+```
+
+Output
+
+```
+A    5
+B   10
+C   15
+```
+
+---
+
+# DataFrame
+
+A DataFrame is a two-dimensional table consisting of rows and columns.
+
+It is the most commonly used Pandas data structure.
+
+Example
+
+```python
+import pandas as pd
+
+data = {
+    "Name":["Alice","Bob"],
+    "Age":[21,22]
+}
+
+df = pd.DataFrame(data)
+
+print(df)
+```
+
+Output
+
+```
+   Name   Age
+0 Alice   21
+1 Bob     22
+```
+
+---
+
+# Creating DataFrame
+
+### Using Dictionary
+
+```python
+data = {
+    "Name":["John","Alice"],
+    "Age":[20,21],
+    "City":["Delhi","Mumbai"]
+}
+
+df = pd.DataFrame(data)
+```
+
+---
+
+### Using List of Lists
+
+```python
+data = [
+    ["John",20],
+    ["Alice",21]
+]
+
+df = pd.DataFrame(
+    data,
+    columns=["Name","Age"]
+)
+```
+
+---
+
+# Reading CSV File
+
+CSV = Comma Separated Values
+
+```python
+df = pd.read_csv("students.csv")
+```
+
+This reads a CSV file into a DataFrame.
+
+---
+
+# Viewing Data
+
+## head()
+
+Displays first 5 rows.
+
+```python
+df.head()
+```
+
+Specify rows
+
+```python
+df.head(10)
+```
+
+---
+
+## tail()
+
+Displays last 5 rows.
+
+```python
+df.tail()
+```
+
+---
+
+# Dataset Information
+
+## info()
+
+Shows
+
+* Number of rows
+* Number of columns
+* Data types
+* Missing values
+* Memory usage
+
+```python
+df.info()
+```
+
+Example Output
+
+```
+RangeIndex: 100 entries
+
+Columns: 4
+
+Data columns
+
+Name
+
+Age
+
+Salary
+
+City
+
+Data Types
+
+int64
+
+float64
+
+object
+```
+
+---
+
+# Statistical Summary
+
+## describe()
+
+Provides statistics for numerical columns.
+
+```python
+df.describe()
+```
+
+Returns
+
+* Count
+* Mean
+* Standard Deviation
+* Minimum
+* Maximum
+* Quartiles
+
+---
+
+# Shape
+
+Returns number of rows and columns.
+
+```python
+df.shape
+```
+
+Output
+
+```
+(100,4)
+```
+
+Meaning
+
+100 rows
+
+4 columns
+
+---
+
+# Column Names
+
+```python
+df.columns
+```
+
+Returns all column names.
+
+---
+
+# Index
+
+```python
+df.index
+```
+
+Returns row indices.
+
+---
+
+# Selecting Columns
+
+Single Column
+
+```python
+df["Age"]
+```
+
+Multiple Columns
+
+```python
+df[["Name","Age"]]
+```
+
+---
+
+# Selecting Rows
+
+Using loc()
+
+```python
+df.loc[0]
+```
+
+Returns first row.
+
+Multiple rows
+
+```python
+df.loc[0:4]
+```
+
+---
+
+# Selecting Rows by Position
+
+Using iloc()
+
+```python
+df.iloc[0]
+```
+
+Second row
+
+```python
+df.iloc[1]
+```
+
+Rows and Columns
+
+```python
+df.iloc[0:5,0:2]
+```
+
+---
+
+# Filtering Data
+
+Example
+
+```python
+df[df["Age"] > 20]
+```
+
+Returns rows where age is greater than 20.
+
+Another example
+
+```python
+df[df["Salary"] > 50000]
+```
+
+---
+
+# Adding New Column
+
+```python
+df["Marks"] = [90,80,95]
+```
+
+---
+
+# Updating Column
+
+```python
+df["Age"] = df["Age"] + 1
+```
+
+---
+
+# Deleting Column
+
+```python
+df.drop("Marks",axis=1)
+```
+
+Permanent deletion
+
+```python
+df.drop("Marks",axis=1,inplace=True)
+```
+
+---
+
+# Missing Values
+
+Check missing values
+
+```python
+df.isnull()
+```
+
+Count missing values
+
+```python
+df.isnull().sum()
+```
+
+Remove missing values
+
+```python
+df.dropna()
+```
+
+Replace missing values
+
+```python
+df.fillna(0)
+```
+
+---
+
+# Sorting Data
+
+Ascending
+
+```python
+df.sort_values("Age")
+```
+
+Descending
+
+```python
+df.sort_values("Age",ascending=False)
+```
+
+---
+
+# Saving DataFrame
+
+```python
+df.to_csv("output.csv")
+```
+
+Without index
+
+```python
+df.to_csv("output.csv",index=False)
+```
+
+---
+
+# Commonly Used Functions
+
+| Function      | Purpose                  |
+| ------------- | ------------------------ |
+| read_csv()    | Read CSV file            |
+| head()        | First 5 rows             |
+| tail()        | Last 5 rows              |
+| info()        | Dataset information      |
+| describe()    | Statistical summary      |
+| shape         | Number of rows & columns |
+| columns       | Column names             |
+| loc[]         | Label-based indexing     |
+| iloc[]        | Position-based indexing  |
+| isnull()      | Check missing values     |
+| fillna()      | Replace missing values   |
+| dropna()      | Remove missing values    |
+| sort_values() | Sort dataset             |
+| to_csv()      | Save DataFrame           |
+
+---
+
+# Difference Between Series and DataFrame
+
+| Series                  | DataFrame               |
+| ----------------------- | ----------------------- |
+| One-dimensional         | Two-dimensional         |
+| Single column           | Multiple columns        |
+| Stores one type of data | Stores multiple columns |
+
+---
+
+# Interview Questions
+
+### What is Pandas?
+
+A Python library used for data manipulation and analysis.
+
+### Difference between Series and DataFrame?
+
+Series is one-dimensional, while DataFrame is two-dimensional.
+
+### Difference between loc() and iloc()?
+
+* loc() uses labels.
+* iloc() uses integer positions.
+
+### Difference between head() and tail()?
+
+* head() returns first rows.
+* tail() returns last rows.
+
+### Difference between dropna() and fillna()?
+
+* dropna() removes missing values.
+* fillna() replaces missing values.
+
+---
+
+# Quick Revision
+
+* Pandas is used for data analysis.
+* Import using `import pandas as pd`.
+* Series → One-dimensional.
+* DataFrame → Two-dimensional table.
+* `read_csv()` reads CSV files.
+* `head()` → First rows.
+* `tail()` → Last rows.
+* `info()` → Dataset information.
+* `describe()` → Statistical summary.
+* `loc()` → Label-based indexing.
+* `iloc()` → Position-based indexing.
+* `shape` → Rows and columns.
+* `columns` → Column names.
+* `isnull()` → Check missing values.
+* `fillna()` → Replace missing values.
+* `dropna()` → Remove missing values.
+* `sort_values()` → Sort data.
+* `to_csv()` → Save DataFrame.
+
+---
+
+**Time Complexity (Common Operations)**
+
+| Operation     | Complexity |
+| ------------- | ---------- |
+| Access column | O(1)       |
+| Filter rows   | O(N)       |
+| Sort values   | O(N log N) |
+| Read CSV      | O(N)       |
+| Write CSV     | O(N)       |

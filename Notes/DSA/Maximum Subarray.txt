@@ -1,0 +1,364 @@
+==========================================
+LeetCode #53 - Maximum Subarray
+==========================================
+
+Topic:
+Kadane's Algorithm
+
+Difficulty:
+Easy
+
+--------------------------------------------------
+Problem
+--------------------------------------------------
+
+Given an integer array nums, return the maximum sum of a contiguous subarray.
+
+Example:
+
+nums = [-2,1,-3,4,-1,2,1,-5,4]
+
+Answer = 6
+
+Subarray = [4,-1,2,1]
+
+--------------------------------------------------
+Key Concept
+--------------------------------------------------
+
+Subarray = Continuous (Consecutive) elements.
+
+Allowed:
+[4,-1,2]
+
+Not Allowed:
+[4,2]
+
+--------------------------------------------------
+Approach 1 : Brute Force
+--------------------------------------------------
+
+Idea:
+
+Generate every possible subarray.
+Calculate its sum.
+Store the maximum sum.
+
+Instead of calculating the sum repeatedly,
+keep extending the current subarray using a running sum.
+
+Visualization
+
+nums = [3,-2,5]
+
+Start at index 0
+
+[3]
+[3,-2]
+[3,-2,5]
+
+-------------------
+
+Start at index 1
+
+[-2]
+[-2,5]
+
+-------------------
+
+Start at index 2
+
+[5]
+
+Every possible subarray is checked.
+
+--------------------------------------------------
+Algorithm
+--------------------------------------------------
+
+1. Pick every starting index.
+2. Set current_sum = 0.
+3. Extend the subarray one element at a time.
+4. Add current element to current_sum.
+5. Update max_sum.
+6. Return max_sum.
+
+--------------------------------------------------
+Code
+--------------------------------------------------
+
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+
+        max_sum = nums[0]
+
+        for i in range(len(nums)):
+            current_sum = 0
+
+            for j in range(i, len(nums)):
+                current_sum += nums[j]
+
+                if current_sum > max_sum:
+                    max_sum = current_sum
+
+        return max_sum
+
+--------------------------------------------------
+Complexity
+--------------------------------------------------
+
+Time  : O(N²)
+
+Space : O(1)
+
+--------------------------------------------------
+Why Brute Force Fails
+--------------------------------------------------
+
+It checks every possible subarray.
+
+Large input
+
+↓
+
+Too many operations
+
+↓
+
+Time Limit Exceeded (TLE)
+
+--------------------------------------------------
+Approach 2 : Kadane's Algorithm
+--------------------------------------------------
+
+Core Idea:
+
+At every element ask only ONE question.
+
+Should I continue my current subarray?
+
+OR
+
+Should I start a new subarray from this element?
+
+Choose whichever gives a larger sum.
+
+--------------------------------------------------
+Two Choices
+--------------------------------------------------
+
+Choice 1
+
+Continue
+
+current_sum + num
+
+Choice 2
+
+Restart
+
+num
+
+Take the maximum.
+
+current_sum = max(num, current_sum + num)
+
+After deciding the best current subarray,
+
+update the overall answer.
+
+max_sum = max(max_sum, current_sum)
+
+--------------------------------------------------
+Intuition
+--------------------------------------------------
+
+Think of carrying a backpack.
+
+Positive number = Gold
+
+Negative number = Heavy rock
+
+If the backpack becomes too heavy because of previous
+negative values,
+
+Throw it away.
+
+Start carrying from the current element.
+
+That is exactly what Kadane's Algorithm does.
+
+--------------------------------------------------
+Dry Run
+--------------------------------------------------
+
+nums = [5,-10,6]
+
+Initially
+
+current_sum = 5
+max_sum = 5
+
+Current number = -10
+
+Continue
+
+5 + (-10) = -5
+
+Restart
+
+-10
+
+Choose
+
+-5
+
+-------------------
+
+Current number = 6
+
+Continue
+
+-5 + 6 = 1
+
+Restart
+
+6
+
+Choose
+
+6
+
+max_sum = 6
+
+Answer = 6
+
+--------------------------------------------------
+Algorithm
+--------------------------------------------------
+
+1. Initialize
+
+current_sum = nums[0]
+max_sum = nums[0]
+
+2. Traverse from second element.
+
+3. Decide
+
+Continue
+
+OR
+
+Restart
+
+4. Update overall maximum.
+
+5. Return max_sum.
+
+--------------------------------------------------
+Code
+--------------------------------------------------
+
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+
+        current_sum = nums[0]
+        max_sum = nums[0]
+
+        for num in nums[1:]:
+
+            current_sum = max(num, current_sum + num)
+
+            max_sum = max(max_sum, current_sum)
+
+        return max_sum
+
+--------------------------------------------------
+Complexity
+--------------------------------------------------
+
+Time  : O(N)
+
+Space : O(1)
+
+--------------------------------------------------
+Common Mistakes
+--------------------------------------------------
+
+❌ Checking only nums[i] + nums[j]
+
+Ignores elements in between.
+
+-------------------
+
+❌ Initializing max_sum = 0
+
+Fails for all negative arrays.
+
+Example
+
+[-5,-2,-8]
+
+Correct answer = -2
+
+-------------------
+
+❌ Always writing
+
+current_sum += num
+
+This never allows restarting.
+
+Kadane's strength is deciding
+
+Continue
+
+OR
+
+Restart.
+
+--------------------------------------------------
+Pattern Recognition
+--------------------------------------------------
+
+Keywords
+
+Maximum Sum
+Contiguous
+Subarray
+Largest Sum
+
+↓
+
+Think
+
+Kadane's Algorithm
+
+--------------------------------------------------
+Revision (30 Seconds)
+--------------------------------------------------
+
+• Contiguous means consecutive elements.
+
+• Brute Force checks every possible subarray.
+
+• Brute Force Time = O(N²)
+
+• Kadane avoids checking every subarray.
+
+• At every element choose:
+
+Continue = current_sum + num
+
+OR
+
+Restart = num
+
+• Update overall maximum.
+
+• Kadane Time = O(N)
+
+• Space = O(1)
+
+==========================================

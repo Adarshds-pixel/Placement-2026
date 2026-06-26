@@ -1,0 +1,466 @@
+==========================================
+LeetCode #152 - Maximum Product Subarray
+==========================================
+
+Topic:
+Dynamic Programming
+(Kadane's Algorithm Variation)
+
+Difficulty:
+Medium
+
+--------------------------------------------------
+Problem
+--------------------------------------------------
+
+Given an integer array nums, find the contiguous
+subarray having the largest product and return it.
+
+Example
+
+nums = [2,3,-2,4]
+
+Output = 6
+
+Subarray = [2,3]
+
+Product = 6
+
+--------------------------------------------------
+Key Concept
+--------------------------------------------------
+
+Subarray = Continuous (Consecutive) elements.
+
+Allowed
+
+[2,3]
+
+Not Allowed
+
+[2,4]
+
+--------------------------------------------------
+Why Kadane's Algorithm Doesn't Work
+--------------------------------------------------
+
+Maximum Sum
+
+Negative running sum is usually bad.
+
+Example
+
+Current Sum = -20
+
+Next Number = 5
+
+Continue
+
+-20 + 5 = -15
+
+Restart
+
+5
+
+Restart is better.
+
+-----------------------------------
+
+Maximum Product
+
+Negative running product is NOT always bad.
+
+Example
+
+Current Product = -20
+
+Next Number = -5
+
+Continue
+
+-20 × (-5)
+
+=
+
+100
+
+A bad negative product suddenly becomes the best
+positive product.
+
+Therefore,
+
+We CANNOT discard negative products.
+
+--------------------------------------------------
+Core Observation
+--------------------------------------------------
+
+Negative × Negative = Positive
+
+Today's smallest (most negative) product
+
+↓
+
+Can become tomorrow's largest product.
+
+Therefore we must store BOTH
+
+1. Maximum Product Ending Here
+
+2. Minimum Product Ending Here
+
+--------------------------------------------------
+Three Choices At Every Element
+--------------------------------------------------
+
+Suppose
+
+max_prod = 7
+
+min_prod = -8
+
+num = -3
+
+Three possibilities
+
+1.
+
+Start New
+
+num
+
+=
+
+-3
+
+--------------------
+
+2.
+
+Continue Previous Maximum
+
+7 × (-3)
+
+=
+
+-21
+
+--------------------
+
+3.
+
+Continue Previous Minimum
+
+-8 × (-3)
+
+=
+
+24
+
+Maximum = 24
+
+Minimum = -21
+
+--------------------------------------------------
+Algorithm
+--------------------------------------------------
+
+For every element
+
+Find
+
+temp_max = maximum of
+
+num
+
+max_prod × num
+
+min_prod × num
+
+----------------------
+
+Find
+
+temp_min = minimum of
+
+num
+
+max_prod × num
+
+min_prod × num
+
+----------------------
+
+Update
+
+max_prod = temp_max
+
+min_prod = temp_min
+
+----------------------
+
+Update Answer
+
+answer = max(answer, max_prod)
+
+--------------------------------------------------
+Why Temporary Variables?
+--------------------------------------------------
+
+Suppose
+
+max_prod = 7
+
+min_prod = -8
+
+num = -3
+
+If max_prod is updated first,
+
+then min_prod calculation will use the NEW value
+instead of the OLD value.
+
+This gives wrong answers.
+
+Therefore,
+
+First calculate
+
+temp_max
+
+temp_min
+
+Then update
+
+max_prod
+
+min_prod
+
+--------------------------------------------------
+Code
+--------------------------------------------------
+
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+
+        max_prod = nums[0]
+        min_prod = nums[0]
+        answer = nums[0]
+
+        for num in nums[1:]:
+
+            temp_max = max(
+                num,
+                max_prod * num,
+                min_prod * num
+            )
+
+            temp_min = min(
+                num,
+                max_prod * num,
+                min_prod * num
+            )
+
+            max_prod = temp_max
+            min_prod = temp_min
+
+            answer = max(answer, max_prod)
+
+        return answer
+
+--------------------------------------------------
+Dry Run
+--------------------------------------------------
+
+nums = [2,3,-2,4]
+
+Initially
+
+max_prod = 2
+min_prod = 2
+answer = 2
+
+--------------------
+
+num = 3
+
+Choices
+
+3
+
+2×3 = 6
+
+2×3 = 6
+
+temp_max = 6
+
+temp_min = 3
+
+answer = 6
+
+--------------------
+
+num = -2
+
+Choices
+
+-2
+
+6×(-2) = -12
+
+3×(-2) = -6
+
+temp_max = -2
+
+temp_min = -12
+
+answer = 6
+
+--------------------
+
+num = 4
+
+Choices
+
+4
+
+-2×4 = -8
+
+-12×4 = -48
+
+temp_max = 4
+
+temp_min = -48
+
+answer = 6
+
+--------------------------------------------------
+Complexity
+--------------------------------------------------
+
+Time  : O(N)
+
+Space : O(1)
+
+--------------------------------------------------
+Common Mistakes
+--------------------------------------------------
+
+❌ Applying Kadane directly
+
+current_sum = max(num, current_sum + num)
+
+Works only for SUM.
+
+Not PRODUCT.
+
+--------------------
+
+❌ Tracking only maximum product
+
+Need both
+
+max_prod
+
+AND
+
+min_prod
+
+--------------------
+
+❌ Ignoring negative numbers
+
+Negative numbers can become positive after another
+negative multiplication.
+
+--------------------
+
+❌ Updating max_prod before computing min_prod
+
+Always use
+
+temp_max
+
+temp_min
+
+--------------------------------------------------
+Pattern Recognition
+--------------------------------------------------
+
+Keywords
+
+Maximum Product
+
+Contiguous
+
+Subarray
+
+↓
+
+Think
+
+Track BOTH
+
+Maximum Product
+
+Minimum Product
+
+--------------------------------------------------
+Difference from Maximum Subarray
+--------------------------------------------------
+
+Maximum Subarray (LC 53)
+
+• Track only current_sum
+
+• Two choices
+
+  Continue
+
+  OR
+
+  Restart
+
+-----------------------------------
+
+Maximum Product Subarray (LC 152)
+
+• Track max_prod and min_prod
+
+• Three choices
+
+  Start New
+
+  Extend Previous Maximum
+
+  Extend Previous Minimum
+
+--------------------------------------------------
+Revision (30 Seconds)
+--------------------------------------------------
+
+• Contiguous means consecutive elements.
+
+• Negative × Negative = Positive.
+
+• Track BOTH maximum and minimum product.
+
+• At every element compare
+
+  num
+
+  max_prod × num
+
+  min_prod × num
+
+• Largest becomes temp_max.
+
+• Smallest becomes temp_min.
+
+• Update answer using max_prod.
+
+• Time = O(N)
+
+• Space = O(1)
+
+==========================================
