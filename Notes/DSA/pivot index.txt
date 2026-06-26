@@ -1,0 +1,690 @@
+============================================================
+DAY 5 DSA NOTES
+LeetCode 724 - Find Pivot Index
+Pattern: Prefix Sum
+Difficulty: Easy
+============================================================
+
+------------------------------------------------------------
+PROBLEM STATEMENT
+------------------------------------------------------------
+
+Given an integer array nums,
+
+Return the Pivot Index.
+
+Pivot Index is the index where
+
+Sum of all elements on the LEFT
+
+=
+
+Sum of all elements on the RIGHT.
+
+The current element is NOT included in either sum.
+
+If no Pivot Index exists,
+
+return -1.
+
+------------------------------------------------------------
+EXAMPLE
+------------------------------------------------------------
+
+Input
+
+nums = [1,7,3,6,5,6]
+
+Output
+
+3
+
+Explanation
+
+Left Side
+
+1 + 7 + 3 = 11
+
+Right Side
+
+5 + 6 = 11
+
+Since both are equal,
+
+Pivot Index = 3
+
+------------------------------------------------------------
+IMPORTANT OBSERVATION
+------------------------------------------------------------
+
+At Pivot Index,
+
+Current Element
+
+does NOT belong to
+
+Left Side
+
+or
+
+Right Side.
+
+Example
+
+[1,7,3,6,5,6]
+       ↑
+
+Left Sum
+
+1+7+3
+
+Right Sum
+
+5+6
+
+Current element (6)
+
+is ignored.
+
+------------------------------------------------------------
+BRUTE FORCE APPROACH
+------------------------------------------------------------
+
+Idea
+
+Check every index.
+
+For every index,
+
+calculate
+
+Left Sum
+
+and
+
+Right Sum
+
+separately.
+
+If both are equal,
+
+return that index.
+
+------------------------------------------------------------
+BRUTE FORCE DRY RUN
+------------------------------------------------------------
+
+nums = [1,7,3,6,5,6]
+
+i = 0
+
+Left Sum = 0
+
+Right Sum = 7+3+6+5+6 = 27
+
+Not Equal
+
+--------------------------------
+
+i = 1
+
+Left Sum = 1
+
+Right Sum = 3+6+5+6 = 20
+
+Not Equal
+
+--------------------------------
+
+i = 2
+
+Left Sum = 1+7 = 8
+
+Right Sum = 6+5+6 = 17
+
+Not Equal
+
+--------------------------------
+
+i = 3
+
+Left Sum = 1+7+3 = 11
+
+Right Sum = 5+6 = 11
+
+Equal
+
+Return 3
+
+------------------------------------------------------------
+BRUTE FORCE CODE
+------------------------------------------------------------
+
+class Solution:
+    def pivotIndex(self, nums: List[int]) -> int:
+
+        for i in range(len(nums)):
+
+            left_sum = sum(nums[:i])
+
+            right_sum = sum(nums[i+1:])
+
+            if left_sum == right_sum:
+                return i
+
+        return -1
+
+------------------------------------------------------------
+TIME COMPLEXITY
+------------------------------------------------------------
+
+Outer Loop
+
+O(N)
+
+sum(nums[:i])
+
+O(N)
+
+sum(nums[i+1:])
+
+O(N)
+
+Overall
+
+O(N²)
+
+------------------------------------------------------------
+SPACE COMPLEXITY
+------------------------------------------------------------
+
+O(1)
+
+No extra array used.
+
+------------------------------------------------------------
+WHY IS BRUTE FORCE SLOW?
+------------------------------------------------------------
+
+Example
+
+nums = [1,7,3,6,5,6]
+
+For every index,
+
+Python again calculates
+
+Left Sum
+
+and
+
+Right Sum.
+
+Example
+
+For i = 4
+
+Python calculates
+
+1+7+3+6
+
+Again.
+
+These repeated calculations
+
+make the algorithm slow.
+
+------------------------------------------------------------
+OPTIMAL APPROACH
+------------------------------------------------------------
+
+Idea
+
+Instead of calculating
+
+Left Sum
+
+again and again,
+
+keep updating it.
+
+Also,
+
+calculate Total Sum only once.
+
+Formula
+
+Right Sum
+
+=
+
+Total Sum
+
+-
+
+Left Sum
+
+-
+
+Current Element
+
+------------------------------------------------------------
+WHY THIS FORMULA?
+------------------------------------------------------------
+
+Total Sum
+
+=
+
+Left Sum
+
++
+
+Current Element
+
++
+
+Right Sum
+
+Therefore
+
+Right Sum
+
+=
+
+Total Sum
+
+-
+
+Left Sum
+
+-
+
+Current Element
+
+------------------------------------------------------------
+VISUAL UNDERSTANDING
+------------------------------------------------------------
+
+nums
+
+[1,7,3,6,5,6]
+
+Total Sum
+
+28
+
+Initially
+
+Left Sum
+
+0
+
+--------------------------------
+
+i = 0
+
+Left = 0
+
+Right =
+
+28-0-1
+
+=
+
+27
+
+Not Equal
+
+Move 1 to left
+
+Left = 1
+
+--------------------------------
+
+i = 1
+
+Left = 1
+
+Right
+
+=
+
+28-1-7
+
+=
+
+20
+
+Move 7
+
+Left = 8
+
+--------------------------------
+
+i = 2
+
+Left = 8
+
+Right
+
+=
+
+28-8-3
+
+=
+
+17
+
+Move 3
+
+Left = 11
+
+--------------------------------
+
+i = 3
+
+Left = 11
+
+Right
+
+=
+
+28-11-6
+
+=
+
+11
+
+Equal
+
+Return 3
+
+------------------------------------------------------------
+OPTIMAL CODE
+------------------------------------------------------------
+
+class Solution:
+    def pivotIndex(self, nums: List[int]) -> int:
+
+        total_sum = sum(nums)
+
+        left_sum = 0
+
+        for i in range(len(nums)):
+
+            right_sum = total_sum - left_sum - nums[i]
+
+            if left_sum == right_sum:
+                return i
+
+            left_sum += nums[i]
+
+        return -1
+
+------------------------------------------------------------
+TIME COMPLEXITY
+------------------------------------------------------------
+
+sum(nums)
+
+O(N)
+
+Loop
+
+O(N)
+
+Overall
+
+O(N)
+
+------------------------------------------------------------
+SPACE COMPLEXITY
+------------------------------------------------------------
+
+O(1)
+
+Only two variables are used.
+
+------------------------------------------------------------
+WHY UPDATE LEFT SUM AFTER CHECKING?
+------------------------------------------------------------
+
+Current Element
+
+does NOT belong
+
+to
+
+Left Side.
+
+So first
+
+calculate
+
+Right Sum.
+
+Check
+
+Left == Right.
+
+Only after checking,
+
+move current element
+
+to the Left Side.
+
+Example
+
+[1,7,3,6,5,6]
+
+       ↑
+
+Current element
+
+6
+
+Should NOT be added
+
+before comparison.
+
+------------------------------------------------------------
+COMMON DOUBT
+------------------------------------------------------------
+
+Why
+
+Right Sum
+
+=
+
+Total
+
+-
+
+Left
+
+-
+
+Current
+
+?
+
+Because
+
+Total
+
+already contains
+
+Left
+
++
+
+Current
+
++
+
+Right
+
+Remove
+
+Left
+
+Remove
+
+Current
+
+Remaining
+
+=
+
+Right
+
+------------------------------------------------------------
+COMMON MISTAKES
+------------------------------------------------------------
+
+Mistake 1
+
+Updating
+
+Left Sum
+
+before checking.
+
+Wrong.
+
+Current element
+
+should not be included.
+
+------------------------------------------------
+
+Mistake 2
+
+Using
+
+sum()
+
+inside loop.
+
+Makes
+
+Time Complexity
+
+O(N²)
+
+------------------------------------------------
+
+Mistake 3
+
+Forgetting
+
+return -1
+
+when Pivot doesn't exist.
+
+------------------------------------------------------------
+PATTERN LEARNED
+------------------------------------------------------------
+
+Prefix Sum
+
+Running Sum
+
+Cumulative Sum
+
+Whenever
+
+Repeated Sum Calculations
+
+appear,
+
+think
+
+Prefix Sum.
+
+------------------------------------------------------------
+INTERVIEW QUESTIONS
+------------------------------------------------------------
+
+Q1
+
+Why calculate Total Sum only once?
+
+To avoid repeated calculations.
+
+------------------------------------------------
+
+Q2
+
+Why update Left Sum after checking?
+
+Because current element
+does not belong to left side.
+
+------------------------------------------------
+
+Q3
+
+Can we solve without Prefix Array?
+
+Yes.
+
+Using
+
+Total Sum
+
+and
+
+Running Left Sum.
+
+------------------------------------------------
+
+Q4
+
+Why is Space Complexity O(1)?
+
+Because
+
+No extra array
+
+is created.
+
+------------------------------------------------------------
+ONE LINE REVISION
+------------------------------------------------------------
+
+Left Sum
+
+starts at 0.
+
+Right Sum
+
+=
+
+Total Sum
+
+-
+
+Left Sum
+
+-
+
+Current Element
+
+Compare
+
+Left == Right
+
+Then
+
+move current element
+
+to Left.
+
+Time = O(N)
+
+Space = O(1)
+
+Pattern = Prefix Sum

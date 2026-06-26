@@ -1,0 +1,774 @@
+===========================================================
+HTML FUNDAMENTALS
+Topic: Web Development
+Language: HTML5 (HyperText Markup Language)
+===========================================================
+
+WHAT IS HTML?
+-------------
+
+HTML stands for
+
+HyperText Markup Language
+
+HTML is the standard markup language used to create the structure of web pages.
+
+It tells the browser WHAT should be displayed.
+
+HTML is NOT a programming language.
+
+It is a Markup Language.
+
+-----------------------------------------------------------
+
+WHY DO WE NEED HTML?
+--------------------
+
+HTML is used to:
+
+• Create web pages
+• Structure website content
+• Display text, images, videos and links
+• Build forms
+• Create tables
+• Connect CSS and JavaScript
+
+Without HTML,
+
+There is no webpage.
+
+-----------------------------------------------------------
+
+WHAT IS A MARKUP LANGUAGE?
+--------------------------
+
+A Markup Language uses tags to define elements.
+
+Example
+
+<h1>Hello World</h1>
+
+Here
+
+<h1>
+
+defines a Heading.
+
+-----------------------------------------------------------
+
+WHAT IS HYPERTEXT?
+------------------
+
+HyperText means text containing links.
+
+Example
+
+<a href="https://google.com">
+Google
+</a>
+
+Clicking this link takes us to another webpage.
+
+-----------------------------------------------------------
+
+BASIC HTML STRUCTURE
+--------------------
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>My Website</title>
+
+</head>
+
+<body>
+
+<h1>Hello World</h1>
+
+</body>
+
+</html>
+
+-----------------------------------------------------------
+
+EXPLANATION OF STRUCTURE
+------------------------
+
+<!DOCTYPE html>
+
+Tells browser that this document uses HTML5.
+
+--------------------------------
+
+<html>
+
+Root element.
+
+Everything is written inside it.
+
+--------------------------------
+
+<head>
+
+Contains metadata.
+
+Not visible on webpage.
+
+Example
+
+Title
+
+CSS
+
+Meta Tags
+
+--------------------------------
+
+<title>
+
+Title shown on browser tab.
+
+--------------------------------
+
+<body>
+
+Contains all visible content.
+
+-----------------------------------------------------------
+
+HTML ELEMENT
+------------
+
+Example
+
+<p>Hello</p>
+
+Complete thing is called an HTML Element.
+
+-----------------------------------------------------------
+
+HTML TAG
+--------
+
+Opening Tag
+
+<p>
+
+Closing Tag
+
+</p>
+
+-----------------------------------------------------------
+
+HTML ATTRIBUTE
+--------------
+
+Provides additional information.
+
+Example
+
+<a href="https://google.com">
+
+href
+
+is an attribute.
+
+-----------------------------------------------------------
+
+COMMON HTML TAGS
+----------------
+
+Heading
+
+<h1>
+
+to
+
+<h6>
+
+--------------------------------
+
+Paragraph
+
+<p>
+
+--------------------------------
+
+Line Break
+
+<br>
+
+--------------------------------
+
+Horizontal Line
+
+<hr>
+
+--------------------------------
+
+Bold
+
+<b>
+
+or
+
+<strong>
+
+--------------------------------
+
+Italic
+
+<i>
+
+or
+
+<em>
+
+--------------------------------
+
+Underline
+
+<u>
+
+--------------------------------
+
+Highlight
+
+<mark>
+
+--------------------------------
+
+Delete Text
+
+<del>
+
+--------------------------------
+
+Superscript
+
+<sup>
+
+--------------------------------
+
+Subscript
+
+<sub>
+
+-----------------------------------------------------------
+
+LISTS
+-----
+
+Ordered List
+
+<ol>
+
+<li>Apple</li>
+
+<li>Mango</li>
+
+</ol>
+
+--------------------------------
+
+Unordered List
+
+<ul>
+
+<li>Apple</li>
+
+<li>Mango</li>
+
+</ul>
+
+--------------------------------
+
+Description List
+
+<dl>
+
+<dt>HTML</dt>
+
+<dd>Markup Language</dd>
+
+</dl>
+
+-----------------------------------------------------------
+
+ANCHOR TAG
+----------
+
+Used to create hyperlinks.
+
+Syntax
+
+<a href="URL">
+
+Example
+
+<a href="https://google.com">
+
+Google
+
+</a>
+
+-----------------------------------------------------------
+
+IMAGE TAG
+---------
+
+Syntax
+
+<img src="image.jpg" alt="Image">
+
+Important Attributes
+
+src
+
+Image path
+
+alt
+
+Alternative text
+
+width
+
+Image width
+
+height
+
+Image height
+
+-----------------------------------------------------------
+
+TABLE
+-----
+
+<table>
+
+<tr>
+
+<th>Name</th>
+
+<th>Age</th>
+
+</tr>
+
+<tr>
+
+<td>John</td>
+
+<td>20</td>
+
+</tr>
+
+</table>
+
+Tags
+
+<table>
+
+Creates table
+
+<tr>
+
+Table Row
+
+<th>
+
+Table Heading
+
+<td>
+
+Table Data
+
+-----------------------------------------------------------
+
+FORMS
+-----
+
+Used to collect user information.
+
+Example
+
+<form>
+
+<input>
+
+<label>
+
+<button>
+
+<textarea>
+
+<select>
+
+<option>
+
+</form>
+
+-----------------------------------------------------------
+
+INPUT TYPES
+-----------
+
+text
+
+password
+
+email
+
+number
+
+date
+
+radio
+
+checkbox
+
+file
+
+submit
+
+reset
+
+color
+
+range
+
+-----------------------------------------------------------
+
+BUTTON
+-------
+
+<button>
+
+Click Me
+
+</button>
+
+-----------------------------------------------------------
+
+DIV
+---
+
+Generic block container.
+
+Mostly used with CSS.
+
+-----------------------------------------------------------
+
+SPAN
+----
+
+Inline container.
+
+Used to style part of text.
+
+-----------------------------------------------------------
+
+SEMANTIC TAGS
+-------------
+
+<header>
+
+<nav>
+
+<main>
+
+<section>
+
+<article>
+
+<aside>
+
+<footer>
+
+Advantages
+
+• Better readability
+
+• Better SEO
+
+• Better Accessibility
+
+-----------------------------------------------------------
+
+HTML COMMENTS
+-------------
+
+<!-- This is a comment -->
+
+Browser ignores comments.
+
+-----------------------------------------------------------
+
+BLOCK ELEMENTS
+--------------
+
+Take full width.
+
+Examples
+
+<div>
+
+<p>
+
+<h1>
+
+<section>
+
+-----------------------------------------------------------
+
+INLINE ELEMENTS
+---------------
+
+Take only required width.
+
+Examples
+
+<span>
+
+<a>
+
+<img>
+
+<strong>
+
+-----------------------------------------------------------
+
+HTML ENTITIES
+-------------
+
+&lt;
+
+<
+
+--------------------------------
+
+&gt;
+
+>
+
+--------------------------------
+
+&amp;
+
+&
+
+--------------------------------
+
+&nbsp;
+
+Space
+
+-----------------------------------------------------------
+
+MULTIMEDIA
+----------
+
+Audio
+
+<audio>
+
+Video
+
+<video>
+
+Iframe
+
+<iframe>
+
+-----------------------------------------------------------
+
+META TAGS
+---------
+
+<meta charset="UTF-8">
+
+Character Encoding
+
+--------------------------------
+
+<meta name="viewport">
+
+Responsive Website
+
+--------------------------------
+
+<meta name="description">
+
+SEO Description
+
+-----------------------------------------------------------
+
+LINKING CSS
+-----------
+
+<link rel="stylesheet" href="style.css">
+
+-----------------------------------------------------------
+
+LINKING JAVASCRIPT
+------------------
+
+<script src="script.js"></script>
+
+-----------------------------------------------------------
+
+BEST PRACTICES
+--------------
+
+• Use semantic tags.
+
+• Always close tags.
+
+• Use meaningful names.
+
+• Write proper indentation.
+
+• Add alt attribute for images.
+
+• Use labels in forms.
+
+• Keep code readable.
+
+-----------------------------------------------------------
+
+COMMON MISTAKES
+---------------
+
+❌ Forgetting closing tags.
+
+❌ Using too many <br> tags.
+
+❌ Not adding alt attribute.
+
+❌ Wrong nesting of elements.
+
+❌ Using <b> instead of <strong> for important text.
+
+-----------------------------------------------------------
+
+INTERVIEW QUESTIONS
+-------------------
+
+Q. What is HTML?
+
+HTML is a markup language used to structure webpages.
+
+--------------------------------
+
+Q. Is HTML a programming language?
+
+No.
+
+It is a Markup Language.
+
+--------------------------------
+
+Q. Difference between HTML and CSS?
+
+HTML
+
+Creates structure.
+
+CSS
+
+Adds styling.
+
+--------------------------------
+
+Q. Difference between div and span?
+
+div
+
+Block Element
+
+span
+
+Inline Element
+
+--------------------------------
+
+Q. Difference between id and class?
+
+id
+
+Unique
+
+Used for one element.
+
+class
+
+Reusable
+
+Can be used by multiple elements.
+
+--------------------------------
+
+Q. Why use Semantic HTML?
+
+• Better SEO
+
+• Better Accessibility
+
+• Easy maintenance
+
+-----------------------------------------------------------
+
+MOST IMPORTANT TAGS
+-------------------
+
+<html>
+
+<head>
+
+<title>
+
+<body>
+
+<h1>
+
+<p>
+
+<a>
+
+<img>
+
+<ul>
+
+<ol>
+
+<li>
+
+<table>
+
+<form>
+
+<input>
+
+<button>
+
+<div>
+
+<span>
+
+<header>
+
+<footer>
+
+<section>
+
+<nav>
+
+-----------------------------------------------------------
+
+ONE-LINE REVISION
+-----------------
+
+HTML (HyperText Markup Language) is the standard markup language used to create the structure of webpages using elements, tags and attributes. It forms the backbone of every website and works together with CSS for styling and JavaScript for interactivity.
+
+===========================================================

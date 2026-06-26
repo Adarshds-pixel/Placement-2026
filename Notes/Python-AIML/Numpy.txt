@@ -1,0 +1,601 @@
+===========================================================
+NUMPY FUNDAMENTALS
+Topic: AI/ML Foundation
+Library: NumPy (Numerical Python)
+===========================================================
+
+WHAT IS NUMPY?
+--------------
+
+NumPy (Numerical Python) is a Python library used for:
+
+• Numerical Computing
+• Mathematical Operations
+• Matrix Operations
+• Scientific Computing
+• AI & Machine Learning
+• Data Analysis
+
+It provides a powerful N-dimensional array (ndarray) which is much faster than Python Lists.
+
+-----------------------------------------------------------
+
+WHY DO WE NEED NUMPY?
+---------------------
+
+Python Lists have limitations for mathematical computations.
+
+Problems with Python Lists:
+
+• Slower for numerical operations
+• Higher memory overhead
+• No element-wise arithmetic
+• Requires loops for calculations
+
+NumPy solves these problems by:
+
+• Faster execution
+• Better memory management
+• Vectorized operations
+• Broadcasting
+• Optimized compiled C implementation
+
+-----------------------------------------------------------
+
+WHY IS NUMPY FASTER?
+--------------------
+
+Reasons:
+
+1. Continuous Memory Allocation
+
+Python List
+
+Object -> Pointer -> Value
+
+NumPy Array
+
+Value Value Value Value
+
+Stored continuously in memory.
+
+--------------------------------
+
+2. Optimized C Implementation
+
+NumPy performs computations using optimized compiled C code.
+
+--------------------------------
+
+3. Vectorization
+
+Operations are applied on the entire array at once.
+
+No explicit Python loops required.
+
+-----------------------------------------------------------
+
+IMPORTING NUMPY
+---------------
+
+import numpy as np
+
+"np" is an alias for NumPy.
+
+-----------------------------------------------------------
+
+CREATING ARRAYS
+---------------
+
+1.
+
+arr = np.array([1,2,3])
+
+--------------------------------
+
+2.
+
+arr = np.array([[1,2],[3,4]])
+
+--------------------------------
+
+3.
+
+arr = np.array([1.5,2.3])
+
+--------------------------------
+
+4.
+
+arr = np.array(["AI","ML"])
+
+-----------------------------------------------------------
+
+NDARRAY
+--------
+
+ndarray means
+
+N-Dimensional Array
+
+Examples
+
+1D
+
+[1 2 3]
+
+--------------------------------
+
+2D
+
+[[1 2]
+ [3 4]]
+
+--------------------------------
+
+3D
+
+[
+ [[1 2]
+  [3 4]]
+
+ [[5 6]
+  [7 8]]
+]
+
+-----------------------------------------------------------
+
+DIMENSIONS (ndim)
+-----------------
+
+Returns the number of dimensions.
+
+Example
+
+arr = np.array([1,2,3])
+
+arr.ndim
+
+Output
+
+1
+
+--------------------------------
+
+2D Array
+
+arr.ndim
+
+Output
+
+2
+
+--------------------------------
+
+3D Array
+
+Output
+
+3
+
+-----------------------------------------------------------
+
+SHAPE
+-----
+
+Returns
+
+(rows, columns)
+
+Example
+
+arr = np.array([
+[1,2,3],
+[4,5,6]
+])
+
+arr.shape
+
+Output
+
+(2,3)
+
+Meaning
+
+2 Rows
+
+3 Columns
+
+-----------------------------------------------------------
+
+DATA TYPE (dtype)
+-----------------
+
+Returns data type of array.
+
+Example
+
+arr = np.array([1,2,3])
+
+arr.dtype
+
+Output
+
+int64
+
+--------------------------------
+
+Mixed Data
+
+arr = np.array([1,2.5,3])
+
+Output
+
+float64
+
+Reason
+
+NumPy converts all elements into a common compatible type.
+
+This is called
+
+Type Promotion.
+
+-----------------------------------------------------------
+
+ELEMENT-WISE OPERATIONS
+-----------------------
+
+Addition
+
+arr + 5
+
+--------------------------------
+
+Subtraction
+
+arr - 2
+
+--------------------------------
+
+Multiplication
+
+arr * 3
+
+--------------------------------
+
+Division
+
+arr / 2
+
+--------------------------------
+
+Power
+
+arr ** 2
+
+Every operation is performed on every element.
+
+-----------------------------------------------------------
+
+VECTORIZATION
+-------------
+
+Definition
+
+Performing mathematical operations on an entire array at once without writing explicit Python loops.
+
+Example
+
+arr = np.array([2,3,4])
+
+arr * 10
+
+Output
+
+[20 30 40]
+
+Advantages
+
+• Faster
+• Cleaner code
+• Uses optimized compiled code
+• Used heavily in AI/ML
+
+-----------------------------------------------------------
+
+BROADCASTING
+------------
+
+Definition
+
+Broadcasting allows NumPy to perform operations between arrays of different shapes by automatically expanding the smaller array without duplicating data.
+
+Example
+
+arr = np.array([2,3,4])
+
+arr + 10
+
+Output
+
+[12 13 14]
+
+NumPy automatically treats
+
+10
+
+as
+
+[10 10 10]
+
+without actually creating that array.
+
+-----------------------------------------------------------
+
+RESHAPE
+-------
+
+Changes the shape of an array.
+
+Example
+
+arr = np.array([1,2,3,4,5,6])
+
+arr.reshape(2,3)
+
+Output
+
+[[1 2 3]
+ [4 5 6]]
+
+Rule
+
+Total number of elements must remain same.
+
+2 × 3 = 6
+
+--------------------------------
+
+Using -1
+
+arr.reshape(-1,3)
+
+NumPy automatically calculates required rows.
+
+-----------------------------------------------------------
+
+ARRAY CREATION FUNCTIONS
+------------------------
+
+Create Array
+
+np.array()
+
+--------------------------------
+
+Zeros
+
+np.zeros((2,3))
+
+--------------------------------
+
+Ones
+
+np.ones((2,2))
+
+--------------------------------
+
+Fill Constant
+
+np.full((2,3),7)
+
+--------------------------------
+
+Identity Matrix
+
+np.eye(3)
+
+--------------------------------
+
+Range
+
+np.arange(1,10)
+
+--------------------------------
+
+Evenly Spaced Values
+
+np.linspace(0,10,5)
+
+--------------------------------
+
+Random Decimal
+
+np.random.rand()
+
+--------------------------------
+
+Random Integer
+
+np.random.randint()
+
+-----------------------------------------------------------
+
+MATHEMATICAL FUNCTIONS
+----------------------
+
+Mean
+
+arr.mean()
+
+--------------------------------
+
+Sum
+
+arr.sum()
+
+--------------------------------
+
+Maximum
+
+arr.max()
+
+--------------------------------
+
+Minimum
+
+arr.min()
+
+--------------------------------
+
+Standard Deviation
+
+arr.std()
+
+--------------------------------
+
+Variance
+
+arr.var()
+
+--------------------------------
+
+Square Root
+
+np.sqrt(arr)
+
+-----------------------------------------------------------
+
+COPY VS ASSIGNMENT
+------------------
+
+Assignment
+
+b = a
+
+Both variables point to same memory.
+
+Changing one changes the other.
+
+--------------------------------
+
+Copy
+
+b = a.copy()
+
+Creates a new independent array.
+
+Changes do not affect original array.
+
+-----------------------------------------------------------
+
+AI/ML APPLICATIONS
+------------------
+
+NumPy is used for:
+
+• Image Processing
+• Audio Processing
+• Dataset Manipulation
+• Matrix Operations
+• Deep Learning
+• Neural Networks
+• Scientific Computing
+
+Libraries built on NumPy:
+
+• Pandas
+• Scikit-Learn
+• TensorFlow
+• PyTorch
+• OpenCV
+
+-----------------------------------------------------------
+
+INTERVIEW QUESTIONS
+-------------------
+
+Q. Why is NumPy faster than Python Lists?
+
+Answer:
+
+Because NumPy stores data in continuous memory and performs operations using optimized compiled C code with vectorization.
+
+--------------------------------
+
+Q. What is Vectorization?
+
+Performing operations on an entire array without writing Python loops.
+
+--------------------------------
+
+Q. What is Broadcasting?
+
+Automatically expanding arrays of compatible shapes for arithmetic operations without copying data.
+
+--------------------------------
+
+Q. Difference between Python List and NumPy Array?
+
+Python List
+
+• Slower
+• More memory
+• No element-wise arithmetic
+• General-purpose
+
+NumPy Array
+
+• Faster
+• Memory efficient
+• Element-wise operations
+• Optimized for numerical computing
+
+-----------------------------------------------------------
+
+MOST IMPORTANT NUMPY FUNCTIONS
+------------------------------
+
+np.array()
+
+np.zeros()
+
+np.ones()
+
+np.full()
+
+np.eye()
+
+np.arange()
+
+np.linspace()
+
+np.random.rand()
+
+np.random.randint()
+
+reshape()
+
+mean()
+
+sum()
+
+max()
+
+min()
+
+std()
+
+var()
+
+copy()
+
+-----------------------------------------------------------
+
+ONE-LINE REVISION
+-----------------
+
+NumPy is a fast numerical computing library that provides memory-efficient multidimensional arrays, vectorized operations, broadcasting, and optimized mathematical computations, making it the foundation of AI, Machine Learning, and Data Science.
+
+===========================================================

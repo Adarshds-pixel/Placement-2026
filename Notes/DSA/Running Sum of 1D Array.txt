@@ -1,0 +1,585 @@
+# ============================================================
+# DAY 5 DSA NOTES
+# LeetCode 1480 - Running Sum of 1D Array
+# Pattern: Prefix Sum
+# Difficulty: Easy
+# ============================================================
+
+------------------------------------------------------------
+PROBLEM STATEMENT
+------------------------------------------------------------
+
+Given an integer array nums,
+
+Return an array where
+
+runningSum[i] = nums[0] + nums[1] + ... + nums[i]
+
+In simple words,
+
+Each element should contain the sum of itself and all previous elements.
+
+------------------------------------------------------------
+EXAMPLE
+------------------------------------------------------------
+
+Input:
+
+nums = [1,2,3,4]
+
+Output:
+
+[1,3,6,10]
+
+Explanation:
+
+Index 0 → 1
+
+Index 1 → 1+2 = 3
+
+Index 2 → 1+2+3 = 6
+
+Index 3 → 1+2+3+4 = 10
+
+------------------------------------------------------------
+OBSERVATION
+------------------------------------------------------------
+
+Every answer depends on the previous elements.
+
+Current Answer
+
+=
+
+Previous Sum
+
++
+
+Current Element
+
+This is our first Prefix Sum problem.
+
+------------------------------------------------------------
+BRUTE FORCE APPROACH
+------------------------------------------------------------
+
+Idea:
+
+For every index,
+
+start from index 0
+
+calculate the sum again and again.
+
+Example:
+
+nums = [1,2,3,4]
+
+For index 0
+
+sum = 1
+
+For index 1
+
+sum = 1+2 = 3
+
+For index 2
+
+sum = 1+2+3 = 6
+
+For index 3
+
+sum = 1+2+3+4 = 10
+
+Notice
+
+For every index
+
+we are starting from 0 again.
+
+Lots of repeated work.
+
+------------------------------------------------------------
+BRUTE FORCE DRY RUN
+------------------------------------------------------------
+
+nums = [1,2,3,4]
+
+result = []
+
+i = 0
+
+sum = 1
+
+result = [1]
+
+----------------------
+
+i = 1
+
+sum = 1+2 = 3
+
+result = [1,3]
+
+----------------------
+
+i = 2
+
+sum = 1+2+3 = 6
+
+result = [1,3,6]
+
+----------------------
+
+i = 3
+
+sum = 1+2+3+4 = 10
+
+result = [1,3,6,10]
+
+------------------------------------------------------------
+BRUTE FORCE CODE
+------------------------------------------------------------
+
+class Solution:
+    def runningSum(self, nums: List[int]) -> List[int]:
+
+        result = []
+
+        for i in range(len(nums)):
+
+            total = 0
+
+            for j in range(i + 1):
+                total += nums[j]
+
+            result.append(total)
+
+        return result
+
+------------------------------------------------------------
+BRUTE FORCE COMPLEXITY
+------------------------------------------------------------
+
+Time Complexity
+
+Outer Loop = N
+
+Inner Loop = N
+
+Overall
+
+O(N²)
+
+Space Complexity
+
+Result Array
+
+O(N)
+
+------------------------------------------------------------
+WHY IS BRUTE FORCE BAD?
+------------------------------------------------------------
+
+Example
+
+nums = [1,2,3,4]
+
+To calculate
+
+Index 3
+
+we again calculate
+
+1+2+3
+
+even though we already calculated it before.
+
+Lots of repeated calculations.
+
+------------------------------------------------------------
+OPTIMAL APPROACH
+------------------------------------------------------------
+
+Key Observation
+
+Running Sum at current index
+
+=
+
+Current Element
+
++
+
+Previous Running Sum
+
+Instead of calculating
+
+1+2+3
+
+again,
+
+store it inside the same array.
+
+------------------------------------------------------------
+VISUAL UNDERSTANDING
+------------------------------------------------------------
+
+nums
+
+[1,2,3,4]
+
+Start from index 1
+
+Iteration 1
+
+nums[1]
+
+=
+
+nums[1]
+
++
+
+nums[0]
+
+2
+
++
+
+1
+
+=
+
+3
+
+Array
+
+[1,3,3,4]
+
+----------------------
+
+Iteration 2
+
+nums[2]
+
+=
+
+nums[2]
+
++
+
+nums[1]
+
+3
+
++
+
+3
+
+=
+
+6
+
+Array
+
+[1,3,6,4]
+
+----------------------
+
+Iteration 3
+
+nums[3]
+
+=
+
+nums[3]
+
++
+
+nums[2]
+
+4
+
++
+
+6
+
+=
+
+10
+
+Array
+
+[1,3,6,10]
+
+Finished.
+
+------------------------------------------------------------
+WHY DO WE START FROM INDEX 1?
+------------------------------------------------------------
+
+Index 0
+
+has no previous element.
+
+Running Sum of first element
+
+is always
+
+the element itself.
+
+Example
+
+nums = [5,6,7]
+
+Running Sum
+
+Index 0
+
+= 5
+
+Nothing to add.
+
+Therefore
+
+start from index 1.
+
+------------------------------------------------------------
+OPTIMAL DRY RUN
+------------------------------------------------------------
+
+nums = [1,2,3,4]
+
+i = 1
+
+nums[1] = 2 + 1
+
+Array
+
+[1,3,3,4]
+
+----------------------
+
+i = 2
+
+nums[2] = 3 + 3
+
+Array
+
+[1,3,6,4]
+
+----------------------
+
+i = 3
+
+nums[3] = 4 + 6
+
+Array
+
+[1,3,6,10]
+
+Return nums.
+
+------------------------------------------------------------
+OPTIMAL CODE
+------------------------------------------------------------
+
+class Solution:
+    def runningSum(self, nums: List[int]) -> List[int]:
+
+        i = 1
+
+        while i < len(nums):
+
+            nums[i] += nums[i-1]
+
+            i += 1
+
+        return nums
+
+------------------------------------------------------------
+OPTIMAL COMPLEXITY
+------------------------------------------------------------
+
+Time Complexity
+
+Only one traversal
+
+O(N)
+
+Space Complexity
+
+No extra array used
+
+O(1)
+
+------------------------------------------------------------
+WHY DOES THIS WORK?
+------------------------------------------------------------
+
+Suppose
+
+nums
+
+[1,2,3,4]
+
+After first iteration
+
+nums
+
+[1,3,3,4]
+
+Now
+
+nums[1]
+
+is no longer 2
+
+It stores
+
+Running Sum
+
+of first two elements.
+
+So next time
+
+nums[2]
+
+adds
+
+Current Value
+
++
+
+Previous Running Sum
+
+This continues for every index.
+
+------------------------------------------------------------
+COMMON MISTAKES
+------------------------------------------------------------
+
+Mistake 1
+
+Starting from index 0
+
+Wrong
+
+nums[0] += nums[-1]
+
+Python uses last element.
+
+Wrong answer.
+
+----------------------
+
+Mistake 2
+
+Using
+
+while i <= len(nums)
+
+Wrong
+
+Last index
+
+is
+
+len(nums)-1
+
+Correct
+
+while i < len(nums)
+
+----------------------
+
+Mistake 3
+
+Printing instead of returning
+
+Wrong
+
+print(nums)
+
+Correct
+
+return nums
+
+------------------------------------------------------------
+PATTERN LEARNED
+------------------------------------------------------------
+
+Prefix Sum
+
+Running Sum
+
+Cumulative Sum
+
+Whenever
+
+current answer depends on all previous elements
+
+Think about
+
+Prefix Sum.
+
+------------------------------------------------------------
+INTERVIEW QUESTIONS
+------------------------------------------------------------
+
+Q1
+
+Why start from index 1?
+
+Because first element has no previous element.
+
+------------------------------------------------
+
+Q2
+
+Why modify original array?
+
+To save extra space.
+
+------------------------------------------------
+
+Q3
+
+Can we solve using another array?
+
+Yes.
+
+But Space Complexity becomes O(N).
+
+------------------------------------------------
+
+Q4
+
+Why is this Prefix Sum?
+
+Because every element stores
+
+sum from
+
+0
+
+to
+
+current index.
+
+------------------------------------------------------------
+ONE LINE REVISION
+------------------------------------------------------------
+
+Running Sum = Current Element + Previous Running Sum
+
+Start from index 1
+
+Modify array in-place
+
+Time = O(N)
+
+Space = O(1)
+
+Pattern = Prefix Sum

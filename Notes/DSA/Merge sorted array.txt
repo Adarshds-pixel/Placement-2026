@@ -1,0 +1,618 @@
+===========================================================
+LEETCODE 88 - MERGE SORTED ARRAY
+Pattern: Arrays / Merge / Two Arrays
+Difficulty: Easy
+Topic: Arrays
+===========================================================
+
+PROBLEM STATEMENT
+-----------------
+
+You are given two sorted integer arrays.
+
+nums1 has enough extra space at the end to hold all elements of nums2.
+
+Merge nums2 into nums1 as one sorted array.
+
+Example:
+
+nums1 = [1,2,3,0,0,0]
+m = 3
+
+nums2 = [2,5,6]
+n = 3
+
+Output
+
+[1,2,2,3,5,6]
+
+-----------------------------------------------------------
+
+IMPORTANT OBSERVATION
+---------------------
+
+nums1 contains
+
+Actual elements = first m elements
+
+Remaining zeros are EMPTY SPACE.
+
+Example
+
+nums1 = [1,2,3,0,0,0]
+
+Only
+
+1
+2
+3
+
+are valid.
+
+Zeros are placeholders.
+
+-----------------------------------------------------------
+
+INTUITION
+---------
+
+We have two already sorted arrays.
+
+Goal
+
+Merge them while maintaining sorted order.
+
+Since both arrays are already sorted,
+we should use this property instead of sorting again.
+
+-----------------------------------------------------------
+
+BRUTE FORCE APPROACH
+--------------------
+
+Idea
+----
+
+1. Take only valid elements from nums1.
+2. Combine nums1 and nums2.
+3. Sort the combined array.
+4. Copy back into nums1.
+
+Algorithm
+---------
+
+1. Extract first m elements from nums1.
+2. Append nums2.
+3. Sort.
+4. Copy sorted elements back into nums1.
+
+Python Code
+-----------
+
+class Solution:
+
+    def merge(self, nums1, m, nums2, n):
+
+        temp = nums1[:m]
+
+        combined = temp + nums2
+
+        combined.sort()
+
+        for i in range(len(combined)):
+            nums1[i] = combined[i]
+
+-----------------------------------------------------------
+
+DRY RUN
+-------
+
+nums1
+
+[1,2,3,0,0,0]
+
+↓
+
+Take first 3 elements
+
+[1,2,3]
+
+↓
+
+Combine
+
+[1,2,3,2,5,6]
+
+↓
+
+Sort
+
+[1,2,2,3,5,6]
+
+↓
+
+Copy back
+
+nums1
+
+[1,2,2,3,5,6]
+
+-----------------------------------------------------------
+
+TIME COMPLEXITY
+---------------
+
+Combining
+
+O(m+n)
+
+Sorting
+
+O((m+n) log(m+n))
+
+Copying
+
+O(m+n)
+
+Overall
+
+O((m+n) log(m+n))
+
+-----------------------------------------------------------
+
+SPACE COMPLEXITY
+----------------
+
+Extra array used
+
+O(m+n)
+
+-----------------------------------------------------------
+
+WHY BRUTE FORCE IS NOT OPTIMAL
+------------------------------
+
+1. Extra array required.
+
+2. Sorting again even though both arrays are already sorted.
+
+3. Higher time complexity.
+
+-----------------------------------------------------------
+
+BETTER APPROACH
+---------------
+
+Idea
+
+Compare elements manually.
+
+Insert smaller element first.
+
+Still requires extra array.
+
+Time
+
+O(m+n)
+
+Space
+
+O(m+n)
+
+Not in-place.
+
+-----------------------------------------------------------
+
+OPTIMAL APPROACH
+----------------
+
+MAIN OBSERVATION
+----------------
+
+Look carefully.
+
+nums1
+
+[1,2,3,0,0,0]
+
+Extra space exists at the END.
+
+Instead of filling from front,
+
+fill from BACK.
+
+Nothing gets overwritten.
+
+-----------------------------------------------------------
+
+THREE INDICES
+-------------
+
+i = m-1
+
+Points to last valid element of nums1
+
+j = n-1
+
+Points to last element of nums2
+
+k = m+n-1
+
+Points to last position of nums1
+
+-----------------------------------------------------------
+
+CORE IDEA
+---------
+
+Compare
+
+nums1[i]
+
+and
+
+nums2[j]
+
+Whichever is larger,
+
+place it at nums1[k].
+
+Move corresponding pointer.
+
+Repeat.
+
+-----------------------------------------------------------
+
+ALGORITHM
+---------
+
+Step 1
+
+i = m-1
+
+j = n-1
+
+k = m+n-1
+
+Step 2
+
+While both arrays contain elements
+
+Compare
+
+nums1[i]
+
+nums2[j]
+
+Place larger element at nums1[k]
+
+Move pointers.
+
+Step 3
+
+If nums2 still contains elements,
+
+copy remaining elements.
+
+-----------------------------------------------------------
+
+PYTHON CODE
+-----------
+
+class Solution:
+
+    def merge(self, nums1, m, nums2, n):
+
+        i = m - 1
+        j = n - 1
+        k = m + n - 1
+
+        while i >= 0 and j >= 0:
+
+            if nums1[i] > nums2[j]:
+
+                nums1[k] = nums1[i]
+                i -= 1
+
+            else:
+
+                nums1[k] = nums2[j]
+                j -= 1
+
+            k -= 1
+
+        while j >= 0:
+
+            nums1[k] = nums2[j]
+
+            j -= 1
+            k -= 1
+
+-----------------------------------------------------------
+
+COMPLETE DRY RUN
+----------------
+
+nums1
+
+[1,2,3,0,0,0]
+
+nums2
+
+[2,5,6]
+
+i = 2
+
+j = 2
+
+k = 5
+
+--------------------------------
+
+Compare
+
+3
+
+6
+
+Place
+
+6
+
+nums1
+
+[1,2,3,0,0,6]
+
+--------------------------------
+
+Compare
+
+3
+
+5
+
+Place
+
+5
+
+nums1
+
+[1,2,3,0,5,6]
+
+--------------------------------
+
+Compare
+
+3
+
+2
+
+Place
+
+3
+
+nums1
+
+[1,2,3,3,5,6]
+
+--------------------------------
+
+Compare
+
+2
+
+2
+
+Place
+
+2
+
+nums1
+
+[1,2,2,3,5,6]
+
+Done.
+
+-----------------------------------------------------------
+
+WHY SECOND WHILE LOOP?
+----------------------
+
+while(i>=0 and j>=0)
+
+stops when
+
+either
+
+i<0
+
+OR
+
+j<0
+
+Suppose
+
+nums1
+
+[4,5,6,0,0,0]
+
+nums2
+
+[1,2,3]
+
+Eventually
+
+i = -1
+
+j = 2
+
+nums2 still has
+
+1
+
+2
+
+3
+
+These values must still be copied.
+
+Therefore
+
+while(j>=0)
+
+copies remaining elements.
+
+-----------------------------------------------------------
+
+WHY THERE IS NO
+
+while(i>=0)
+
+?
+
+Because
+
+remaining elements of nums1
+
+are already in correct position.
+
+Nothing needs to be copied.
+
+-----------------------------------------------------------
+
+TIME COMPLEXITY
+---------------
+
+Every element processed once.
+
+O(m+n)
+
+-----------------------------------------------------------
+
+SPACE COMPLEXITY
+----------------
+
+No extra array.
+
+O(1)
+
+-----------------------------------------------------------
+
+COMMON MISTAKES
+---------------
+
+1.
+
+Starting from front.
+
+Existing elements get overwritten.
+
+--------------------------------
+
+2.
+
+Using sorting.
+
+Sorting is unnecessary because arrays are already sorted.
+
+--------------------------------
+
+3.
+
+Forgetting second while loop.
+
+Remaining nums2 elements never get copied.
+
+--------------------------------
+
+4.
+
+Thinking zeros are actual values.
+
+Zeros are only placeholders.
+
+-----------------------------------------------------------
+
+WHEN SHOULD THIS PATTERN COME TO YOUR MIND?
+-------------------------------------------
+
+Whenever you see
+
+✓ Two sorted arrays
+
+✓ Merge
+
+✓ In-place
+
+✓ Extra space at end
+
+Think
+
+Compare from BACK.
+
+-----------------------------------------------------------
+
+INTERVIEW TIPS
+--------------
+
+Why start from end?
+
+Because extra space exists at end.
+
+Nothing gets overwritten.
+
+--------------------------------
+
+Why O(1) Space?
+
+No extra array used.
+
+--------------------------------
+
+Why O(m+n)?
+
+Every element is processed exactly once.
+
+-----------------------------------------------------------
+
+PATTERN
+-------
+
+Two Sorted Arrays
+
+↓
+
+Merge
+
+↓
+
+Fill from Back
+
+-----------------------------------------------------------
+
+SIMILAR PROBLEMS
+----------------
+
+21. Merge Two Sorted Lists
+
+977. Squares of a Sorted Array
+
+350. Intersection of Two Arrays II
+
+88. Merge Sorted Array
+
+-----------------------------------------------------------
+
+ONE-LINE REVISION
+-----------------
+
+Start from the last valid elements of both arrays,
+compare them,
+place the larger element at the last empty position,
+and continue until all elements are merged.
+
+Time Complexity : O(m+n)
+
+Space Complexity : O(1)
+
+===========================================================

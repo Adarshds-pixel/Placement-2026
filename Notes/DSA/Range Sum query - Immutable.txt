@@ -1,0 +1,771 @@
+============================================================
+DAY 5 DSA NOTES
+LeetCode 303 - Range Sum Query - Immutable
+Pattern: Prefix Sum
+Difficulty: Easy
+============================================================
+
+------------------------------------------------------------
+PROBLEM STATEMENT
+------------------------------------------------------------
+
+Given an integer array nums,
+
+Answer multiple queries.
+
+Each query asks:
+
+Find the sum of elements from
+
+left
+
+to
+
+right
+
+(inclusive).
+
+Example
+
+nums = [-2,0,3,-5,2,-1]
+
+Queries
+
+sumRange(0,2)
+
+sumRange(2,5)
+
+sumRange(0,5)
+
+Instead of calculating every query from scratch,
+
+we should answer each query quickly.
+
+------------------------------------------------------------
+EXAMPLE
+------------------------------------------------------------
+
+Input
+
+nums
+
+[-2,0,3,-5,2,-1]
+
+Query
+
+sumRange(2,5)
+
+Output
+
+-1
+
+Explanation
+
+3
+
++
+
+(-5)
+
++
+
+2
+
++
+
+(-1)
+
+=
+
+-1
+
+------------------------------------------------------------
+OBSERVATION
+------------------------------------------------------------
+
+Imagine there are
+
+100000
+
+queries.
+
+Brute Force
+
+loops every time.
+
+Very slow.
+
+Instead,
+
+calculate something once
+
+and reuse it.
+
+This is exactly why Prefix Sum exists.
+
+------------------------------------------------------------
+BRUTE FORCE APPROACH
+------------------------------------------------------------
+
+Idea
+
+Whenever a query comes,
+
+start from
+
+left
+
+go till
+
+right
+
+and calculate the sum.
+
+------------------------------------------------------------
+BRUTE FORCE DRY RUN
+------------------------------------------------------------
+
+nums
+
+[-2,0,3,-5,2,-1]
+
+Query
+
+sumRange(2,5)
+
+Loop
+
+3
+
+↓
+
+-5
+
+↓
+
+2
+
+↓
+
+-1
+
+Answer
+
+-1
+
+Next query
+
+Loop again.
+
+Every query
+
+starts from scratch.
+
+------------------------------------------------------------
+BRUTE FORCE CODE
+------------------------------------------------------------
+
+class NumArray:
+
+    def __init__(self, nums):
+
+        self.nums = nums
+
+    def sumRange(self, left, right):
+
+        total = 0
+
+        for i in range(left, right + 1):
+            total += self.nums[i]
+
+        return total
+
+------------------------------------------------------------
+TIME COMPLEXITY
+------------------------------------------------------------
+
+Each Query
+
+O(N)
+
+1000 Queries
+
+1000 Loops
+
+Very slow.
+
+------------------------------------------------------------
+SPACE COMPLEXITY
+------------------------------------------------------------
+
+O(1)
+
+------------------------------------------------------------
+WHY IS BRUTE FORCE BAD?
+------------------------------------------------------------
+
+Repeated calculations.
+
+Example
+
+sumRange(2,5)
+
+Later
+
+sumRange(2,4)
+
+Again
+
+Python adds
+
+3
+
+-5
+
+2
+
+Repeated work.
+
+------------------------------------------------------------
+OPTIMAL APPROACH
+------------------------------------------------------------
+
+Idea
+
+Build Prefix Sum
+
+ONLY ONCE.
+
+Then
+
+every query
+
+can be answered
+
+using subtraction.
+
+------------------------------------------------------------
+BUILDING PREFIX SUM
+------------------------------------------------------------
+
+Original
+
+[-2,0,3,-5,2,-1]
+
+Prefix
+
+[-2,-2,1,-4,-2,-3]
+
+Meaning
+
+Prefix[0]
+
+=
+
+-2
+
+----------------
+
+Prefix[1]
+
+=
+
+-2+0
+
+=
+
+-2
+
+----------------
+
+Prefix[2]
+
+=
+
+-2+0+3
+
+=
+
+1
+
+----------------
+
+Prefix[3]
+
+=
+
+-2+0+3-5
+
+=
+
+-4
+
+----------------
+
+Prefix[4]
+
+=
+
+-2
+
+----------------
+
+Prefix[5]
+
+=
+
+-3
+
+------------------------------------------------------------
+KEY IDEA
+------------------------------------------------------------
+
+Prefix[right]
+
+contains
+
+everything
+
+from
+
+0
+
+to
+
+right.
+
+If we remove
+
+everything before
+
+left,
+
+the remaining part
+
+is our answer.
+
+------------------------------------------------------------
+WHY left - 1 ?
+------------------------------------------------------------
+
+Example
+
+nums
+
+[2,4,6,8,10]
+
+Prefix
+
+[2,6,12,20,30]
+
+Find
+
+sumRange(2,4)
+
+Wanted
+
+6+8+10
+
+=
+
+24
+
+Prefix[4]
+
+=
+
+30
+
+Contains
+
+2+4+6+8+10
+
+Remove
+
+everything before index 2
+
+Those elements are
+
+2+4
+
+Where are they stored?
+
+Prefix[1]
+
+=
+
+6
+
+Notice
+
+1
+
+=
+
+left-1
+
+Therefore
+
+Answer
+
+=
+
+30
+
+-
+
+6
+
+=
+
+24
+
+------------------------------------------------------------
+WHY NOT Prefix[left] ?
+------------------------------------------------------------
+
+Suppose
+
+we do
+
+Prefix[4]
+
+-
+
+Prefix[2]
+
+30
+
+-
+
+12
+
+=
+
+18
+
+Wrong.
+
+Why?
+
+Because
+
+Prefix[2]
+
+already contains
+
+6
+
+We accidentally removed
+
+the left element too.
+
+------------------------------------------------------------
+SPECIAL CASE
+------------------------------------------------------------
+
+Suppose
+
+sumRange(0,3)
+
+Wanted
+
+2+4+6+8
+
+Look
+
+Prefix[3]
+
+already stores
+
+20
+
+There are NO elements
+
+before index 0.
+
+Nothing to subtract.
+
+Therefore
+
+If
+
+left == 0
+
+Return
+
+Prefix[right]
+
+------------------------------------------------------------
+OPTIMAL CODE
+------------------------------------------------------------
+
+class NumArray:
+
+    def __init__(self, nums: List[int]):
+
+        self.prefix = nums[:]
+
+        i = 1
+
+        while i < len(self.prefix):
+
+            self.prefix[i] += self.prefix[i-1]
+
+            i += 1
+
+    def sumRange(self, left: int, right: int) -> int:
+
+        if left == 0:
+
+            return self.prefix[right]
+
+        return self.prefix[right] - self.prefix[left-1]
+
+------------------------------------------------------------
+UNDERSTANDING __init__()
+------------------------------------------------------------
+
+__init__()
+
+runs ONLY ONCE
+
+when
+
+NumArray
+
+object
+
+is created.
+
+Its job
+
+is
+
+to build Prefix Sum.
+
+After that
+
+Prefix Sum
+
+is reused
+
+for every query.
+
+------------------------------------------------------------
+UNDERSTANDING sumRange()
+------------------------------------------------------------
+
+Every time
+
+LeetCode asks
+
+sumRange()
+
+Python
+
+does NOT
+
+build Prefix again.
+
+It simply
+
+uses
+
+the existing
+
+Prefix Array
+
+and returns
+
+the answer.
+
+------------------------------------------------------------
+OPTIMAL DRY RUN
+------------------------------------------------------------
+
+nums
+
+[-2,0,3,-5,2,-1]
+
+Prefix
+
+[-2,-2,1,-4,-2,-3]
+
+Query
+
+sumRange(2,5)
+
+Answer
+
+Prefix[5]
+
+-
+
+Prefix[1]
+
+=
+
+-3
+
+-
+
+(-2)
+
+=
+
+-1
+
+------------------------------------------------------------
+TIME COMPLEXITY
+------------------------------------------------------------
+
+Building Prefix
+
+O(N)
+
+Each Query
+
+O(1)
+
+------------------------------------------------------------
+SPACE COMPLEXITY
+------------------------------------------------------------
+
+Prefix Array
+
+O(N)
+
+------------------------------------------------------------
+COMMON MISTAKES
+------------------------------------------------------------
+
+Mistake 1
+
+Using
+
+Prefix[left]
+
+instead of
+
+Prefix[left-1]
+
+Wrong.
+
+------------------------------------------------
+
+Mistake 2
+
+Forgetting
+
+left==0
+
+special case.
+
+------------------------------------------------
+
+Mistake 3
+
+Rebuilding Prefix
+
+inside
+
+sumRange()
+
+Wrong.
+
+Build once.
+
+Reuse forever.
+
+------------------------------------------------------------
+PATTERN LEARNED
+------------------------------------------------------------
+
+Whenever
+
+Many Range Sum Queries
+
+appear,
+
+think
+
+Prefix Sum.
+
+Build Once
+
+Answer Many Times.
+
+------------------------------------------------------------
+INTERVIEW QUESTIONS
+------------------------------------------------------------
+
+Q1
+
+Why use Prefix Sum?
+
+To answer multiple range queries quickly.
+
+--------------------------------------------
+
+Q2
+
+Why left-1?
+
+Because we remove
+
+only the elements
+
+BEFORE
+
+left.
+
+--------------------------------------------
+
+Q3
+
+Why special case
+
+left==0?
+
+Because
+
+there are
+
+no elements
+
+before index 0.
+
+--------------------------------------------
+
+Q4
+
+Why build Prefix only once?
+
+To avoid repeated work.
+
+------------------------------------------------------------
+ONE LINE REVISION
+------------------------------------------------------------
+
+Build Prefix once.
+
+Range Sum
+
+=
+
+Prefix[right]
+
+-
+
+Prefix[left-1]
+
+If left==0
+
+Return Prefix[right]
+
+Build = O(N)
+
+Query = O(1)
+
+Pattern = Prefix Sum

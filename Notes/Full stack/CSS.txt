@@ -1,0 +1,912 @@
+============================================================
+DAY 5 FULL STACK NOTES
+CSS (Cascading Style Sheets)
+Beginner Notes
+============================================================
+
+------------------------------------------------------------
+WHAT IS CSS?
+------------------------------------------------------------
+
+CSS stands for
+
+Cascading Style Sheets
+
+It is used to style HTML webpages.
+
+HTML creates the structure.
+
+CSS makes the webpage beautiful.
+
+Example
+
+HTML
+
+<h1>Hello</h1>
+
+Without CSS
+
+Plain text.
+
+With CSS
+
+Different colors
+Fonts
+Spacing
+Layout
+Borders
+Backgrounds
+
+------------------------------------------------------------
+WHY DO WE USE CSS?
+------------------------------------------------------------
+
+Without CSS
+
+Website looks plain.
+
+With CSS
+
+✓ Professional Design
+
+✓ Better User Experience
+
+✓ Responsive Layout
+
+✓ Attractive UI
+
+------------------------------------------------------------
+WAYS TO ADD CSS
+------------------------------------------------------------
+
+1. Inline CSS
+
+Applied directly inside HTML tag.
+
+Example
+
+<h1 style="color:red;">Hello</h1>
+
+Advantages
+
+• Quick
+
+Disadvantages
+
+• Difficult to maintain
+• Not reusable
+
+------------------------------------------------------------
+
+2. Internal CSS
+
+Written inside
+
+<style>
+
+tag.
+
+Example
+
+<style>
+
+h1{
+color:red;
+}
+
+</style>
+
+Advantages
+
+• One page styling
+
+Disadvantages
+
+• Cannot reuse in multiple pages
+
+------------------------------------------------------------
+
+3. External CSS ⭐⭐⭐⭐⭐
+
+Most preferred.
+
+Create
+
+style.css
+
+Link it using
+
+<link rel="stylesheet" href="style.css">
+
+Advantages
+
+✓ Reusable
+
+✓ Easy Maintenance
+
+✓ Professional
+
+✓ Used in Industry
+
+------------------------------------------------------------
+CSS SYNTAX
+------------------------------------------------------------
+
+selector{
+
+property:value;
+
+}
+
+Example
+
+h1{
+
+color:red;
+
+font-size:40px;
+
+}
+
+------------------------------------------------------------
+PARTS OF CSS
+------------------------------------------------------------
+
+Selector
+
+↓
+
+Which HTML element?
+
+Property
+
+↓
+
+What to change?
+
+Value
+
+↓
+
+New value.
+
+Example
+
+h1{
+
+color:red;
+
+}
+
+Selector
+
+h1
+
+Property
+
+color
+
+Value
+
+red
+
+------------------------------------------------------------
+CSS SELECTORS
+------------------------------------------------------------
+
+1. Element Selector
+
+Targets all elements.
+
+Example
+
+p{
+
+color:blue;
+
+}
+
+Every paragraph becomes blue.
+
+------------------------------------------------------------
+
+2. Class Selector
+
+Starts with
+
+.
+
+Example
+
+.box{
+
+background:yellow;
+
+}
+
+HTML
+
+<div class="box"></div>
+
+Can be reused.
+
+------------------------------------------------------------
+
+3. ID Selector
+
+Starts with
+
+#
+
+Example
+
+#title{
+
+color:red;
+
+}
+
+HTML
+
+<h1 id="title"></h1>
+
+Used only once.
+
+------------------------------------------------------------
+COLORS
+------------------------------------------------------------
+
+Property
+
+color
+
+Changes text color.
+
+Example
+
+p{
+
+color:red;
+
+}
+
+------------------------------------------------------------
+
+background-color
+
+Changes background.
+
+Example
+
+body{
+
+background-color:#f4f7fb;
+
+}
+
+------------------------------------------------------------
+FONTS
+------------------------------------------------------------
+
+font-family
+
+Changes font.
+
+Example
+
+font-family:Arial;
+
+------------------------------------------------------------
+
+font-size
+
+Changes text size.
+
+Example
+
+font-size:20px;
+
+------------------------------------------------------------
+
+font-weight
+
+Changes thickness.
+
+Values
+
+normal
+
+bold
+
+Example
+
+font-weight:bold;
+
+------------------------------------------------------------
+
+text-align
+
+Aligns text.
+
+Values
+
+left
+
+center
+
+right
+
+Example
+
+text-align:center;
+
+------------------------------------------------------------
+BORDERS
+------------------------------------------------------------
+
+Creates boundary.
+
+Syntax
+
+border:2px solid black;
+
+Parts
+
+2px
+
+Thickness
+
+solid
+
+Style
+
+black
+
+Color
+
+------------------------------------------------------------
+
+border-radius
+
+Rounds corners.
+
+Example
+
+border-radius:10px;
+
+------------------------------------------------------------
+MARGIN
+------------------------------------------------------------
+
+Space OUTSIDE the border.
+
+Example
+
+margin:20px;
+
+Visual
+
+Margin
+
+↓
+
+Border
+
+↓
+
+Padding
+
+↓
+
+Content
+
+------------------------------------------------------------
+
+Used for
+
+Spacing between elements.
+
+------------------------------------------------------------
+PADDING
+------------------------------------------------------------
+
+Space INSIDE the border.
+
+Example
+
+padding:20px;
+
+Visual
+
+Border
+
+↓
+
+Padding
+
+↓
+
+Content
+
+------------------------------------------------------------
+
+Used to create breathing space.
+
+------------------------------------------------------------
+WIDTH
+------------------------------------------------------------
+
+Controls horizontal size.
+
+Example
+
+width:400px;
+
+------------------------------------------------------------
+HEIGHT
+------------------------------------------------------------
+
+Controls vertical size.
+
+Example
+
+height:200px;
+
+------------------------------------------------------------
+BOX MODEL ⭐⭐⭐⭐⭐
+------------------------------------------------------------
+
+Every HTML element is a box.
+
+Structure
+
++----------------------------+
+|         Margin             |
+| +------------------------+ |
+| |       Border           | |
+| | +--------------------+ | |
+| | |     Padding        | | |
+| | | +----------------+ | | |
+| | | |   Content      | | | |
+| | | +----------------+ | | |
+| | +--------------------+ | |
+| +------------------------+ |
++----------------------------+
+
+------------------------------------------------------------
+
+Content
+
+Actual text/image.
+
+------------------------------------------------------------
+
+Padding
+
+Space inside border.
+
+------------------------------------------------------------
+
+Border
+
+Boundary around content.
+
+------------------------------------------------------------
+
+Margin
+
+Space outside border.
+
+------------------------------------------------------------
+DISPLAY PROPERTY
+------------------------------------------------------------
+
+Controls how element behaves.
+
+------------------------------------------------------------
+
+Block
+
+Starts on new line.
+
+Takes full width.
+
+Examples
+
+div
+
+p
+
+h1
+
+------------------------------------------------------------
+
+Inline
+
+No new line.
+
+Takes only required width.
+
+Examples
+
+span
+
+a
+
+------------------------------------------------------------
+
+Inline-block
+
+No new line
+
+BUT
+
+Width
+
+Height
+
+Padding
+
+can be applied.
+
+------------------------------------------------------------
+
+None
+
+display:none;
+
+Element disappears.
+
+------------------------------------------------------------
+OVERFLOW
+------------------------------------------------------------
+
+Controls extra content.
+
+Example
+
+overflow:hidden;
+
+overflow:scroll;
+
+overflow:auto;
+
+------------------------------------------------------------
+BOX SHADOW
+------------------------------------------------------------
+
+Creates shadow.
+
+Example
+
+box-shadow:0 4px 12px gray;
+
+Used to create cards.
+
+------------------------------------------------------------
+LINK STYLING
+------------------------------------------------------------
+
+Example
+
+a{
+
+text-decoration:none;
+
+color:black;
+
+}
+
+Removes underline.
+
+------------------------------------------------------------
+FORM STYLING
+------------------------------------------------------------
+
+input{
+
+padding:10px;
+
+border-radius:5px;
+
+border:1px solid gray;
+
+}
+
+------------------------------------------------------------
+BUTTON STYLING
+------------------------------------------------------------
+
+input[type="submit"]{
+
+background-color:blue;
+
+color:white;
+
+cursor:pointer;
+
+}
+
+------------------------------------------------------------
+COMMENTS
+------------------------------------------------------------
+
+/*
+
+This is CSS comment
+
+*/
+
+------------------------------------------------------------
+PX
+------------------------------------------------------------
+
+px
+
+means
+
+Pixels.
+
+Example
+
+font-size:20px;
+
+------------------------------------------------------------
+BEST PRACTICES
+------------------------------------------------------------
+
+✓ Use External CSS
+
+✓ Proper indentation
+
+✓ Meaningful class names
+
+✓ Keep code reusable
+
+✓ Maintain spacing
+
+------------------------------------------------------------
+COMMON MISTAKES
+------------------------------------------------------------
+
+Mistake 1
+
+Missing
+
+;
+
+Wrong
+
+color:red
+
+Correct
+
+color:red;
+
+------------------------------------------------------------
+
+Mistake 2
+
+Missing
+
+{}
+
+Wrong
+
+h1
+
+color:red;
+
+Correct
+
+h1{
+
+color:red;
+
+}
+
+------------------------------------------------------------
+
+Mistake 3
+
+Using ID everywhere.
+
+Use Classes whenever possible.
+
+------------------------------------------------------------
+
+Mistake 4
+
+Using Inline CSS.
+
+Avoid in professional projects.
+
+------------------------------------------------------------
+INTERVIEW QUESTIONS
+------------------------------------------------------------
+
+Q1
+
+Difference between
+
+Margin
+
+and
+
+Padding?
+
+Answer
+
+Margin
+
+Outside Border
+
+Padding
+
+Inside Border
+
+------------------------------------------------------------
+
+Q2
+
+Difference between
+
+Class
+
+and
+
+ID?
+
+Class
+
+Reusable
+
+ID
+
+Unique
+
+------------------------------------------------------------
+
+Q3
+
+Difference between
+
+Inline
+
+Block
+
+Inline-block?
+
+Inline
+
+No width/height
+
+Block
+
+Full width
+
+Inline-block
+
+Width & Height allowed
+
+------------------------------------------------------------
+
+Q4
+
+Which CSS type is most preferred?
+
+External CSS.
+
+------------------------------------------------------------
+
+Q5
+
+What is Box Model?
+
+Content
+
+Padding
+
+Border
+
+Margin
+
+------------------------------------------------------------
+CHEAT SHEET
+------------------------------------------------------------
+
+Text Color
+
+color:red;
+
+Background
+
+background-color:white;
+
+Font
+
+font-family:Arial;
+
+Font Size
+
+font-size:20px;
+
+Bold
+
+font-weight:bold;
+
+Center
+
+text-align:center;
+
+Border
+
+border:2px solid black;
+
+Padding
+
+padding:20px;
+
+Margin
+
+margin:20px;
+
+Width
+
+width:500px;
+
+Height
+
+height:300px;
+
+Rounded Corners
+
+border-radius:10px;
+
+Shadow
+
+box-shadow:0 4px 10px gray;
+
+Hide Element
+
+display:none;
+
+------------------------------------------------------------
+ONE LINE REVISION
+------------------------------------------------------------
+
+HTML creates structure.
+
+CSS styles it.
+
+Use External CSS.
+
+Understand Box Model.
+
+Know Margin vs Padding.
+
+Know Display property.
+
+Most Important Topics
+
+✓ Selectors
+
+✓ Colors
+
+✓ Fonts
+
+✓ Borders
+
+✓ Margin
+
+✓ Padding
+
+✓ Width
+
+✓ Height
+
+✓ Display
+
+✓ Box Model
+
+✓ External CSS
