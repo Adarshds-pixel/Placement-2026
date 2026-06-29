@@ -1,0 +1,246 @@
+====================================================
+MERGE SORT (Divide and Conquer)
+====================================================
+
+Definition
+----------
+Merge Sort is a Divide and Conquer algorithm that divides the array into
+smaller parts until each subarray has one element, then merges the sorted
+subarrays back together.
+
+----------------------------------------------------
+Concept
+----------------------------------------------------
+
+1. Divide the array into two halves.
+2. Keep dividing until each subarray has one element.
+3. Merge the subarrays while comparing elements.
+4. The final merged array is sorted.
+
+----------------------------------------------------
+Why does Merge Sort divide until one element?
+----------------------------------------------------
+
+A single element is already sorted.
+
+So Merge Sort first reaches the base case and then starts merging
+while returning from recursion.
+
+----------------------------------------------------
+Recursion Flow
+----------------------------------------------------
+
+Going Down:
+Split
+↓
+Split
+↓
+Split
+↓
+Single Element
+
+Coming Back:
+Merge + Sort
+↑
+Merge + Sort
+↑
+Merge + Sort
+
+----------------------------------------------------
+Algorithm
+----------------------------------------------------
+
+1. If left >= right
+      Return
+
+2. Find middle
+
+      mid = (left + right) // 2
+
+3. Recursively sort left half
+
+      mergeSort(arr, left, mid)
+
+4. Recursively sort right half
+
+      mergeSort(arr, mid + 1, right)
+
+5. Merge both sorted halves
+
+----------------------------------------------------
+Merge Algorithm
+----------------------------------------------------
+
+1. Create left and right temporary arrays.
+
+2. Use three pointers.
+
+      i -> Left Array
+      j -> Right Array
+      k -> Original Array
+
+3. Compare leftArray[i] and rightArray[j].
+
+4. Copy the smaller element into arr[k].
+
+5. Move the corresponding pointer.
+
+6. Move k.
+
+7. Repeat until one array finishes.
+
+8. Copy the remaining elements from the unfinished array.
+
+----------------------------------------------------
+Base Case
+----------------------------------------------------
+
+if left >= right:
+    return
+
+Reason:
+One element is already sorted.
+
+----------------------------------------------------
+Pointers
+----------------------------------------------------
+
+i -> Left Array
+
+j -> Right Array
+
+k -> Original Array
+
+----------------------------------------------------
+Time Complexity
+----------------------------------------------------
+
+Best Case    : O(n log n)
+
+Average Case : O(n log n)
+
+Worst Case   : O(n log n)
+
+----------------------------------------------------
+Space Complexity
+----------------------------------------------------
+
+O(n)
+
+Reason:
+Temporary arrays are created during merging.
+
+----------------------------------------------------
+Stable?
+----------------------------------------------------
+
+YES
+
+Equal elements keep their original order.
+
+----------------------------------------------------
+Advantages
+----------------------------------------------------
+
+✔ Guaranteed O(n log n)
+✔ Stable Sorting
+✔ Good for Linked Lists
+✔ Predictable Performance
+
+----------------------------------------------------
+Disadvantages
+----------------------------------------------------
+
+✘ Extra Space O(n)
+✘ Slower than Quick Sort in practice for arrays
+
+----------------------------------------------------
+Merge Sort vs Quick Sort
+----------------------------------------------------
+
+Merge Sort
+-----------
+Divide into equal halves
+Merge while returning
+Stable
+Extra Space O(n)
+Worst Case O(n log n)
+
+Quick Sort
+-----------
+Choose Pivot
+Partition
+No Merge Step
+Not Stable
+Average O(n log n)
+Worst O(n²)
+
+----------------------------------------------------
+Important Interview Points
+----------------------------------------------------
+
+• Merge Sort uses Divide and Conquer.
+• Sorting happens during merging, NOT while dividing.
+• Recursion goes down by splitting.
+• Sorting happens while returning.
+• Uses three pointers during merge.
+• Stable Sorting Algorithm.
+• Requires extra space.
+
+----------------------------------------------------
+Code Skeleton
+----------------------------------------------------
+
+mergeSort(arr, left, right)
+
+1. Base Case
+
+if left >= right:
+    return
+
+2. Find Mid
+
+mid = (left + right) // 2
+
+3. Sort Left
+
+mergeSort(arr, left, mid)
+
+4. Sort Right
+
+mergeSort(arr, mid + 1, right)
+
+5. Merge
+
+merge(arr, left, mid, right)
+
+----------------------------------------------------
+Merge Function Skeleton
+----------------------------------------------------
+
+Create leftArray
+Create rightArray
+
+i = 0
+j = 0
+k = left
+
+while both arrays have elements:
+
+    Compare
+
+    Copy smaller element
+
+    Move pointers
+
+Copy remaining left array
+
+Copy remaining right array
+
+----------------------------------------------------
+One-Line Summary
+----------------------------------------------------
+
+Merge Sort divides the array recursively until one element remains,
+then merges the subarrays while comparing elements to produce a fully
+sorted array in O(n log n) time.
