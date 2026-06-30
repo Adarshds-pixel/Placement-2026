@@ -1,0 +1,254 @@
+====================================================
+QUICK SORT (Divide and Conquer)
+====================================================
+
+Definition
+----------
+Quick Sort is a Divide and Conquer algorithm that
+selects a pivot element, places it in its correct
+sorted position, and recursively sorts the left and
+right subarrays.
+
+----------------------------------------------------
+Concept
+----------------------------------------------------
+
+1. Choose a Pivot.
+
+2. Partition the array.
+
+3. Place Pivot in its correct sorted position.
+
+4. Recursively sort the left subarray.
+
+5. Recursively sort the right subarray.
+
+----------------------------------------------------
+How does Quick Sort work?
+----------------------------------------------------
+
+Unlike Merge Sort,
+
+Quick Sort does NOT divide the array into equal halves.
+
+Instead,
+
+It chooses one Pivot and rearranges the array so that
+
+Left Side  -> Smaller than Pivot
+
+Pivot      -> Correct Position
+
+Right Side -> Greater than Pivot
+
+Then recursively sorts both sides.
+
+----------------------------------------------------
+Partition Algorithm (Lomuto)
+----------------------------------------------------
+
+1. Choose last element as Pivot.
+
+2. Initialize
+
+      i = low - 1
+
+3. Traverse from low to high-1 using j.
+
+4. If nums[j] <= Pivot
+
+      i++
+
+      Swap nums[i] and nums[j]
+
+5. After traversal
+
+      Swap nums[i+1] and Pivot
+
+6. Pivot reaches its correct position.
+
+7. Return Pivot Index.
+
+----------------------------------------------------
+Quick Sort Algorithm
+----------------------------------------------------
+
+1. If low >= high
+
+      Return
+
+2. Partition the array.
+
+3. Pivot reaches correct position.
+
+4. Recursively sort left side.
+
+5. Recursively sort right side.
+
+----------------------------------------------------
+Recursion Flow
+----------------------------------------------------
+
+Choose Pivot
+
+↓
+
+Partition
+
+↓
+
+Pivot Fixed
+
+↓
+
+Quick Sort Left
+
+↓
+
+Quick Sort Right
+
+----------------------------------------------------
+Time Complexity
+----------------------------------------------------
+
+Best Case
+
+O(n log n)
+
+Average Case
+
+O(n log n)
+
+Worst Case
+
+O(n²)
+
+----------------------------------------------------
+Worst Case
+----------------------------------------------------
+
+Occurs when partition becomes highly unbalanced.
+
+Example
+
+Already Sorted Array
+
+Reverse Sorted Array
+
+Many Duplicate Elements (using simple Lomuto)
+
+----------------------------------------------------
+Space Complexity
+----------------------------------------------------
+
+Average
+
+O(log n)
+
+(Recursion Stack)
+
+Worst
+
+O(n)
+
+----------------------------------------------------
+Stable?
+----------------------------------------------------
+
+NO
+
+Equal elements may change their order.
+
+----------------------------------------------------
+Advantages
+----------------------------------------------------
+
+✔ Fast in practice
+
+✔ In-place sorting
+
+✔ Cache Friendly
+
+✔ Average O(n log n)
+
+----------------------------------------------------
+Disadvantages
+----------------------------------------------------
+
+✘ Worst Case O(n²)
+
+✘ Not Stable
+
+----------------------------------------------------
+Merge Sort vs Quick Sort
+----------------------------------------------------
+
+Merge Sort
+
+Split into halves
+
+Merge while returning
+
+Stable
+
+Extra Space O(n)
+
+Worst O(n log n)
+
+----------------------------
+
+Quick Sort
+
+Choose Pivot
+
+Partition
+
+No Merge
+
+Not Stable
+
+Worst O(n²)
+
+----------------------------------------------------
+Interview Points
+----------------------------------------------------
+
+• Divide and Conquer
+
+• Pivot Selection
+
+• Partition Function
+
+• Pivot reaches correct position
+
+• Recursively sort left and right
+
+----------------------------------------------------
+Memory Trick
+----------------------------------------------------
+
+Choose Pivot
+
+↓
+
+Partition
+
+↓
+
+Pivot Fixed
+
+↓
+
+Sort Left
+
+↓
+
+Sort Right
+
+----------------------------------------------------
+One-Line Summary
+----------------------------------------------------
+
+Quick Sort selects a pivot, partitions the array around
+the pivot, places the pivot in its correct position,
+and recursively sorts both subarrays.

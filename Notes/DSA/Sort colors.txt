@@ -1,0 +1,227 @@
+====================================================
+SORT COLORS (Dutch National Flag Algorithm)
+====================================================
+
+Definition
+----------
+Sort an array containing only
+
+0
+
+1
+
+2
+
+in one traversal using constant extra space.
+
+----------------------------------------------------
+Idea
+----------------------------------------------------
+
+0 belongs to LEFT
+
+1 belongs to MIDDLE
+
+2 belongs to RIGHT
+
+----------------------------------------------------
+Pointers
+----------------------------------------------------
+
+low
+
+Position where next 0 should be placed.
+
+----------------------------
+
+mid
+
+Current element being checked.
+
+----------------------------
+
+high
+
+Position where next 2 should be placed.
+
+----------------------------------------------------
+Initial Values
+----------------------------------------------------
+
+low = 0
+
+mid = 0
+
+high = len(nums)-1
+
+----------------------------------------------------
+Algorithm
+----------------------------------------------------
+
+1. Initialize
+
+low
+
+mid
+
+high
+
+2. Traverse while
+
+mid <= high
+
+3. If nums[mid] == 0
+
+Swap(low, mid)
+
+low++
+
+mid++
+
+4. Else if nums[mid] == 1
+
+mid++
+
+5. Else (nums[mid] == 2)
+
+Swap(mid, high)
+
+high--
+
+Do NOT increment mid
+
+6. Continue until
+
+mid > high
+
+----------------------------------------------------
+Why don't we move mid after swapping 2?
+----------------------------------------------------
+
+Because after swapping,
+
+a NEW element comes to mid.
+
+It has not been checked.
+
+So we must inspect it again.
+
+----------------------------------------------------
+Why do we move mid after swapping 0?
+----------------------------------------------------
+
+Because the current element is already processed.
+
+The 0 is in its correct position.
+
+----------------------------------------------------
+Pointer Invariant
+----------------------------------------------------
+
+0 ........ low-1
+
+All 0s
+
+----------------------------
+
+low ...... mid-1
+
+All 1s
+
+----------------------------
+
+mid ...... high
+
+Unknown Region
+
+----------------------------
+
+high+1 .... end
+
+All 2s
+
+----------------------------------------------------
+Time Complexity
+----------------------------------------------------
+
+O(n)
+
+Single Traversal
+
+----------------------------------------------------
+Space Complexity
+----------------------------------------------------
+
+O(1)
+
+----------------------------------------------------
+Advantages
+----------------------------------------------------
+
+✔ One Pass
+
+✔ Constant Space
+
+✔ In-place
+
+✔ Very Fast
+
+----------------------------------------------------
+Memory Formula
+----------------------------------------------------
+
+If 0
+
+↓
+
+Swap(low, mid)
+
+low++
+
+mid++
+
+----------------------------
+
+If 1
+
+↓
+
+mid++
+
+----------------------------
+
+If 2
+
+↓
+
+Swap(mid, high)
+
+high--
+
+Don't move mid
+
+----------------------------------------------------
+Interview Points
+----------------------------------------------------
+
+Three Pointer Algorithm
+
+Low
+
+Mid
+
+High
+
+Unknown Region
+
+One Pass
+
+Constant Space
+
+----------------------------------------------------
+One-Line Summary
+----------------------------------------------------
+
+The Dutch National Flag Algorithm uses three pointers
+(low, mid, high) to partition the array into
+0s, 1s, and 2s in a single traversal.
