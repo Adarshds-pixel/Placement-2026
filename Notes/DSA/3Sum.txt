@@ -1,0 +1,63 @@
+===============================
+DAY 11 - LEETCODE NOTES
+Date: 1 July 2026
+===============================
+
+--------------------------------
+1. 3Sum (#15)
+Difficulty: Medium
+Pattern: Sorting + Two Pointer
+--------------------------------
+
+Idea:
+- Sort the array.
+- Fix one element using a loop.
+- Solve Two Sum on the remaining array using two pointers.
+- Skip duplicates to avoid repeated triplets.
+
+Algorithm:
+1. Sort the array.
+2. Traverse each element using i.
+3. Skip duplicate values of i.
+4. Set:
+      left = i + 1
+      right = n - 1
+5. While left < right:
+      total = nums[i] + nums[left] + nums[right]
+
+      if total < 0:
+            left += 1
+
+      elif total > 0:
+            right -= 1
+
+      else:
+            Store triplet
+            left += 1
+            right -= 1
+
+            Skip duplicate left values.
+            Skip duplicate right values.
+
+6. Return result.
+
+Important Points:
+- Fix one element.
+- Remaining problem becomes Two Sum.
+- Skip duplicates for:
+    • Fixed element (i)
+    • Left pointer
+    • Right pointer
+
+Why range(n-2)?
+- We fix one element.
+- We still need two more elements.
+- Therefore, the last two indices cannot be the starting point.
+
+Time Complexity:
+O(n²)
+
+Space Complexity:
+O(1) (excluding output)
+
+===========================================

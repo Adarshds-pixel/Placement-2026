@@ -1,0 +1,106 @@
+Two Pointer Types
+=================
+
+1. Opposite Direction
+
+L -------------> <------------- R
+
+Used In
+
+• Two Sum II
+• Valid Palindrome
+• Container With Most Water
+• 3Sum
+
+Rules
+
+Need Bigger Sum?
+Move Left
+
+Need Smaller Sum?
+Move Right
+
+------------------------------------
+
+2. Same Direction
+
+S F
+
+↓
+
+Fast explores.
+
+↓
+
+Slow builds.
+
+Used In
+
+• Remove Duplicates
+• Move Zeroes
+• Remove Element
+• Merge Arrays
+
+------------------------------------
+
+Pattern Recognition
+
+Sorted Array
+↓
+
+Opposite Two Pointers
+
+String Comparison
+↓
+
+Opposite Two Pointers
+
+In-place Array Modification
+↓
+
+Fast & Slow Pointer
+
+Need Pair
+↓
+
+Opposite Two Pointers
+
+Need Remove Duplicates
+↓
+
+Fast & Slow Pointer
+
+------------------------------------
+
+Complexities
+
+Most Two Pointer Problems
+
+Time : O(n)
+
+Space : O(1)
+
+------------------------------------
+
+Golden Rule
+
+Never memorize pointer movement.
+
+Ask yourself:
+
+"Do I need a bigger value?"
+
+Move Left.
+
+"Do I need a smaller value?"
+
+Move Right.
+
+or
+
+"Fast explores."
+
+"Slow builds."
+
+If you remember the reasoning,
+you'll never forget the algorithm.

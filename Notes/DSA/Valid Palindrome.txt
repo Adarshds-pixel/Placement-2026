@@ -1,0 +1,117 @@
+Problem
+-------
+Return True if the given string is a palindrome.
+
+Ignore:
+• Spaces
+• Special Characters
+• Uppercase / Lowercase
+
+Pattern
+-------
+Opposite Direction Two Pointers
+
+Idea
+----
+Compare characters from both ends.
+
+If current character is not a letter or digit,
+skip it.
+
+Only compare valid characters.
+
+Algorithm
+---------
+1. left = 0
+2. right = len(s)-1
+
+While left < right
+
+    If left is not alphanumeric
+        left++
+
+    Else if right is not alphanumeric
+        right--
+
+    Else if lowercase(left)==lowercase(right)
+        left++
+        right--
+
+    Else
+        return False
+
+Return True
+
+Useful Python Functions
+-----------------------
+
+isalnum()
+
+Returns True for:
+A-Z
+a-z
+0-9
+
+Returns False for:
+Space
+@
+#
+$
+%
+,
+.
+
+lower()
+
+Converts uppercase to lowercase.
+
+Example
+
+'A' → 'a'
+
+Why "not" ?
+------------
+
+if not s[left].isalnum():
+
+means
+
+If current character is NOT
+a letter or number.
+
+Template
+--------
+
+left = 0
+right = len(s)-1
+
+while left < right:
+
+    if not s[left].isalnum():
+        left += 1
+
+    elif not s[right].isalnum():
+        right -= 1
+
+    elif s[left].lower() == s[right].lower():
+        left += 1
+        right -= 1
+
+    else:
+        return False
+
+return True
+
+Time Complexity
+---------------
+O(n)
+
+Space Complexity
+----------------
+O(1)
+
+Interview Tip
+-------------
+Whenever you need to compare
+both ends of a string,
+think Two Pointers.

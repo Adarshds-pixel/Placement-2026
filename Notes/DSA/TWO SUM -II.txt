@@ -1,0 +1,65 @@
+Problem
+-------
+Given a sorted array, find two numbers whose sum equals the target.
+Return their 1-based indices.
+
+Pattern
+-------
+Opposite Direction Two Pointers
+
+Idea
+----
+Since the array is sorted:
+• If sum is too small → Increase the smaller number.
+• If sum is too large → Decrease the larger number.
+
+Algorithm
+---------
+1. Place left pointer at index 0.
+2. Place right pointer at last index.
+3. Calculate current sum.
+4. If sum == target → Return indices.
+5. If sum < target → Move left pointer.
+6. If sum > target → Move right pointer.
+7. Repeat until answer is found.
+
+Why It Works
+------------
+Sorted array gives direction.
+Moving left increases the sum.
+Moving right decreases the sum.
+
+Template
+--------
+left = 0
+right = len(nums)-1
+
+while left < right:
+
+    current = nums[left] + nums[right]
+
+    if current == target:
+        return [left+1, right+1]
+
+    elif current < target:
+        left += 1
+
+    else:
+        right -= 1
+
+Time Complexity
+---------------
+O(n)
+
+Space Complexity
+----------------
+O(1)
+
+Interview Tip
+-------------
+Whenever you see:
+• Sorted Array
+• Find Pair
+• Target Sum
+
+Think → Opposite Two Pointers.
